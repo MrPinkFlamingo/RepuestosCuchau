@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Repuestos Cuchau</title>
+    <!-- Cargar Bootstrap local -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Cargar estilos personalizados -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="custom-title text-center mb-4">Registro de Usuario</h3>
+                        
+                        <div id="alerta-formulario"></div>
+
+                        <form id="form-registro" class="needs-validation" novalidate>
+                            
+                            <!-- Nombres y Apellidos -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nombres:</label>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Ej. Juan Andrés" required maxlength="50">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Apellidos:</label>
+                                    <input type="text" class="form-control" id="apellidos" placeholder="Ej. Pérez Silva" required maxlength="100">
+                                </div>
+                            </div>
+
+                            <!-- RUT y Fecha de Nacimiento -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">RUT (Run):</label>
+                                    <input type="text" class="form-control" id="rut" placeholder="19011022K" required minlength="7" maxlength="9">
+                                    <div class="form-text">Sin puntos ni guion.</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Fecha de Nacimiento:</label>
+                                    <input type="text" class="form-control" id="fechaNacimiento" placeholder="DD-MM-AAAA" required maxlength="10">
+                                </div>
+                            </div>
+
+                            <!-- Correos -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Correo Electrónico:</label>
+                                    <input type="email" class="form-control" id="correo" placeholder="ejemplo@duoc.cl" required maxlength="100">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Confirmar Correo:</label>
+                                    <input type="email" class="form-control" id="confirmarCorreo" placeholder="Repite tu correo" required maxlength="100">
+                                </div>
+                            </div>
+
+                            <!-- Contraseñas -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Contraseña:</label>
+                                    <input type="password" class="form-control" id="contrasena" placeholder="Crea una contraseña" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Confirmar Contraseña:</label>
+                                    <input type="password" class="form-control" id="confirmarContrasena" placeholder="Vuelve a escribirla" required>
+                                </div>
+                            </div>
+
+                            <!-- Región y Ciudad -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Región:</label>
+                                    <select class="form-select" required>
+                                        <option value="" disabled selected>Selecciona tu región...</option>
+                                        <option value="metropolitana">Región Metropolitana</option>
+                                        <option value="biobio">Región del Bío Bío</option>
+                                        <option value="araucania">Región de La Araucanía</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Ciudad:</label>
+                                    <select class="form-select" required>
+                                        <option value="" disabled selected>Selecciona tu ciudad...</option>
+                                        
+                                        <optgroup label="Metropolitana">
+                                            <option value="santiago">Santiago</option>
+                                            <option value="puente-alto">Puente Alto</option>
+                                            <option value="maipu">Maipú</option>
+                                        </optgroup>
+                                        
+                                        <optgroup label="Bío Bío">
+                                            <option value="concepcion">Concepción</option>
+                                            <option value="talcahuano">Talcahuano</option>
+                                            <option value="los-angeles">Los Ángeles</option>
+                                        </optgroup>
+                                        
+                                        <optgroup label="La Araucanía">
+                                            <option value="temuco">Temuco</option>
+                                            <option value="villarrica">Villarrica</option>
+                                            <option value="pucon">Pucón</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Dirección -->
+                            <div class="mb-3">
+                                <label class="form-label">Dirección exacta (Máx. 300 caracteres):</label>
+                                <textarea class="form-control" id="direccion" rows="2" maxlength="300" placeholder="Ej: Av. Los Motores 1024, Depto 302..." required></textarea>
+                                <div class="invalid-feedback">Por favor, ingresa tu dirección.</div>
+                            </div>
+
+                            <button class="btn btn-custom-action w-100 mt-4 py-2" type="submit">Registrarme</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script de Validaciones -->
+    <script src="validaciones.js"></script>
+</body>
+</html>

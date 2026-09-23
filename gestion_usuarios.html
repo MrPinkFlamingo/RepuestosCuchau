@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios - Administrador</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <!-- NAVBAR GENERICO -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212529;">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="javascript:history.back()">
+                <i class="bi bi-gear-fill"></i> Panel de Gestión
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navGestion">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navGestion">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="window.location.href='gestion_productos.html' + window.location.search">Lista de Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="window.location.href='gestion_ordenes.html' + window.location.search">Lista de Órdenes</a></li>
+                    <li class="nav-item" id="nav-usuarios-item"><a class="nav-link active" href="#" onclick="window.location.href='gestion_usuarios.html' + window.location.search">Gestión de Usuarios</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link text-white" href="javascript:history.back()"><i class="bi bi-arrow-left-circle"></i> Volver al Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO GESTION USUARIOS -->
+    <div class="container mt-4 flex-grow-1 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="custom-title mb-0">Gestión de Usuarios Registrados</h2>
+            <button class="btn btn-warning fw-bold"><i class="bi bi-person-plus-fill"></i> Nuevo Usuario</button>
+        </div>
+        
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0 text-center align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre Completo</th>
+                                <th>RUT</th>
+                                <th>Correo Electrónico</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Fila 1 -->
+                            <tr>
+                                <td class="fw-bold">USR-001</td>
+                                <td>Carlos Ruiz</td>
+                                <td>15342111-0</td>
+                                <td>carlos@profesor.duoc.cl</td>
+                                <td><span class="badge bg-danger">Administrador</span></td>
+                                <td><span class="badge bg-success">Activo</span></td>
+                                <td><button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i> Editar</button></td>
+                            </tr>
+                            <!-- Fila 2 -->
+                            <tr>
+                                <td class="fw-bold">USR-002</td>
+                                <td>Juan Pérez</td>
+                                <td>19011022-2</td>
+                                <td>juan.perez@duoc.cl</td>
+                                <td><span class="badge bg-success">Vendedor</span></td>
+                                <td><span class="badge bg-success">Activo</span></td>
+                                <td><button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i> Editar</button></td>
+                            </tr>
+                            <!-- Fila 3 -->
+                            <tr>
+                                <td class="fw-bold">USR-003</td>
+                                <td>María López</td>
+                                <td>18567234-4</td>
+                                <td>maria.lopez@gmail.com</td>
+                                <td><span class="badge bg-primary">Cliente</span></td>
+                                <td><span class="badge bg-success">Activo</span></td>
+                                <td><button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i> Editar</button></td>
+                            </tr>
+                            <!-- Fila 4 -->
+                            <tr>
+                                <td class="fw-bold">USR-004</td>
+                                <td>Taller Mecánico El Rápido</td>
+                                <td>76543210-3</td>
+                                <td>taller.elrapido@gmail.com</td>
+                                <td><span class="badge bg-primary">Cliente</span></td>
+                                <td><span class="badge bg-secondary">Inactivo</span></td>
+                                <td><button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i> Editar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER IDENTICO AL RESTO -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="footer-text mb-0">&copy; 2026 Repuestos Cuchau. Todos los derechos reservados.</p>
+            <p class="footer-text mt-1">Soporte y Garantía | Política de Privacidad</p>
+        </div>
+    </footer>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Control de acceso súper sencillo por URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('rol') === 'vendedor') {
+            document.getElementById('nav-usuarios-item').style.display = 'none';
+            // Si por algún motivo el vendedor entra aquí manualmente, se le redirige.
+            window.location.href = 'vendedor.html';
+        }
+    </script>
+</body>
+</html>

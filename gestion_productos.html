@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos - Vendedor</title>
+    <!-- Bootstrap CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link href="style.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <!-- NAVBAR GENERICO -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212529;">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="javascript:history.back()">
+                <i class="bi bi-gear-fill"></i> Panel de Gestión
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navGestion">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navGestion">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#" onclick="window.location.href='gestion_productos.html' + window.location.search">Lista de Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="window.location.href='gestion_ordenes.html' + window.location.search">Lista de Órdenes</a></li>
+                    <li class="nav-item" id="nav-usuarios-item"><a class="nav-link" href="#" onclick="window.location.href='gestion_usuarios.html' + window.location.search">Gestión de Usuarios</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link text-white" href="javascript:history.back()"><i class="bi bi-arrow-left-circle"></i> Volver al Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO LISTA DE PRODUCTOS -->
+    <div class="container mt-4 flex-grow-1 mb-5">
+        <h2 class="mb-4 custom-title" id="titulo-productos">Catálogo de Repuestos</h2>
+        
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0 text-center align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Cod.</th>
+                                <th>Imagen</th>
+                                <th>Nombre y Descripción</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Fila 1 -->
+                            <tr>
+                                <td class="fw-bold">P-001</td>
+                                <td style="width: 80px;"><img src="img/FiltroAceiteBoschPremium.jpg" class="img-fluid rounded bg-white p-1" alt="Filtro" style="max-height: 50px;"></td>
+                                <td class="text-start">
+                                    <strong>Filtro de Aceite Bosch Premium</strong><br>
+                                    <span class="text-muted small">Para motores bencineros 1.6 y 2.0</span>
+                                </td>
+                                <td><span class="badge bg-secondary">Filtros</span></td>
+                                <td class="fw-bold text-success">$8.990</td>
+                                <td><span class="badge bg-success">45</span></td>
+                                <td><button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Detalle</button></td>
+                            </tr>
+                            <!-- Fila 2 -->
+                            <tr>
+                                <td class="fw-bold">P-002</td>
+                                <td><img src="img/JuegoDePastillasBrembo.jpg" class="img-fluid rounded bg-white p-1" alt="Pastillas" style="max-height: 50px;"></td>
+                                <td class="text-start">
+                                    <strong>Juego Pastillas de Freno Brembo</strong><br>
+                                    <span class="text-muted small">Alta durabilidad, cero ruidos.</span>
+                                </td>
+                                <td><span class="badge bg-secondary">Frenos</span></td>
+                                <td class="fw-bold text-success">$35.000</td>
+                                <td><span class="badge bg-warning text-dark">12</span></td>
+                                <td><button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Detalle</button></td>
+                            </tr>
+                            <!-- Fila 3 -->
+                            <tr>
+                                <td class="fw-bold">P-003</td>
+                                <td><img src="img/BateriaHankook55MP.jpg" class="img-fluid rounded bg-white p-1" alt="Bateria" style="max-height: 50px;"></td>
+                                <td class="text-start">
+                                    <strong>Batería Hankook 55AMP</strong><br>
+                                    <span class="text-muted small">Libre de mantención, partida rápida.</span>
+                                </td>
+                                <td><span class="badge bg-secondary">Baterías</span></td>
+                                <td class="fw-bold text-success">$55.990</td>
+                                <td><span class="badge bg-success">20</span></td>
+                                <td><button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Detalle</button></td>
+                            </tr>
+                            <!-- Fila 4 -->
+                            <tr>
+                                <td class="fw-bold">P-004</td>
+                                <td><img src="img/AcaiteMobil5W-30.jpg" class="img-fluid rounded bg-white p-1" alt="Aceite" style="max-height: 50px;"></td>
+                                <td class="text-start">
+                                    <strong>Aceite Mobil 1 Sintético 5W-30 (4L)</strong><br>
+                                    <span class="text-muted small">Máximo rendimiento y protección.</span>
+                                </td>
+                                <td><span class="badge bg-secondary">Aceites</span></td>
+                                <td class="fw-bold text-success">$42.500</td>
+                                <td><span class="badge bg-danger">2</span></td>
+                                <td><button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Detalle</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER IDENTICO AL RESTO -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="footer-text mb-0">&copy; 2026 Repuestos Cuchau. Todos los derechos reservados.</p>
+            <p class="footer-text mt-1">Soporte y Garantía | Política de Privacidad</p>
+        </div>
+    </footer>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Control de acceso súper sencillo por URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('rol') === 'vendedor') {
+            document.getElementById('nav-usuarios-item').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

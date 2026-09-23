@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Repuestos Cuchau</title>
+    <!-- Bootstrap CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link href="style.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- NAVBAR PRINCIPAL -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212529;">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold text-warning" href="index.html">
+                <i class="bi bi-tools"></i> Repuestos Cuchau
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarPrincipal">
+                <!-- Enlaces y Botones -->
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="login.html">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-light btn-sm" href="register.html">Regístrate</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a class="nav-link text-warning fs-5" href="register.html"><i class="bi bi-cart3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NAVBAR DE CATEGORÍAS (Secundario) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <ul class="navbar-nav flex-row w-100 justify-content-center flex-wrap" style="gap: 15px;">
+                <li class="nav-item"><a class="nav-link fw-bold" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="productos.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-primary" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="contactos.html">Contactos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mb-5">
+        
+        <!-- CABECERA NOSOTROS -->
+        <div class="p-5 mb-4 bg-light rounded-3 text-center shadow-sm">
+            <h1 class="display-5 fw-bold custom-title">Sobre Nosotros</h1>
+            <p class="col-md-8 mx-auto fs-5 text-muted">
+                Somos Repuestos Cuchau, tu tienda de confianza. Llevamos más de 10 años entregando calidad, seguridad y velocidad a los motores de todo el país.
+            </p>
+        </div>
+
+        <!-- HISTORIA E IMAGEN -->
+        <div class="row align-items-center mb-5 mt-5">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <h3 class="custom-title">Nuestra Historia</h3>
+                <p class="text-muted">Todo comenzó en un pequeño garaje con la pasión por los motores y la mecánica. Hoy en día, Repuestos Cuchau se ha convertido en la tienda líder en repuestos automotrices, trabajando con las mejores marcas a nivel mundial para garantizar que tu vehículo siempre esté en las mejores condiciones.</p>
+                <p class="text-muted">Creemos firmemente en que cada cliente merece atención personalizada y repuestos de alta durabilidad, sin pagar de más.</p>
+            </div>
+            <div class="col-md-6 text-center">
+                <!-- Usamos una de las imágenes que ya tenemos para ilustrar -->
+                <img src="img/AutoInicio.jpg" alt="Historia de la Empresa" class="img-fluid rounded shadow-sm" style="object-fit: cover; height: 300px; width: 100%;">
+            </div>
+        </div>
+
+        <!-- POR QUÉ ELEGIRNOS -->
+        <div class="row g-4 text-center mt-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4">
+                    <i class="bi bi-shield-check text-warning" style="font-size: 3rem;"></i>
+                    <h5 class="fw-bold mt-3">Calidad Garantizada</h5>
+                    <p class="text-muted small">Todos nuestros repuestos están certificados y probados para brindar el máximo rendimiento.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4">
+                    <i class="bi bi-truck text-warning" style="font-size: 3rem;"></i>
+                    <h5 class="fw-bold mt-3">Envíos Rápidos</h5>
+                    <p class="text-muted small">Despachamos tus pedidos el mismo día para que nunca te quedes con el auto parado.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4">
+                    <i class="bi bi-headset text-warning" style="font-size: 3rem;"></i>
+                    <h5 class="fw-bold mt-3">Soporte Experto</h5>
+                    <p class="text-muted small">Nuestros mecánicos asociados están disponibles para asesorarte en tu compra.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="footer-text mb-0">&copy; 2026 Repuestos Cuchau. Todos los derechos reservados.</p>
+            <p class="footer-text mt-1">Soporte y Garantía | Política de Privacidad</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="validaciones.js"></script>
+</body>
+</html>

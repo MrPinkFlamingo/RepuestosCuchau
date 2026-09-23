@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Repuestos Cuchau</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- NAVBAR PRINCIPAL -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212529;">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="index.html">
+                <i class="bi bi-tools"></i> Repuestos Cuchau
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarPrincipal">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item"><a class="nav-link text-white" href="login.html">Iniciar Sesión</a></li>
+                    <li class="nav-item ms-2"><a class="btn btn-outline-light btn-sm" href="register.html">Regístrate</a></li>
+                    <li class="nav-item ms-3"><a class="nav-link text-warning fs-5" href="register.html"><i class="bi bi-cart3"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NAVBAR DE CATEGORÍAS -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <ul class="navbar-nav flex-row w-100 justify-content-center flex-wrap" style="gap: 15px;">
+                <li class="nav-item"><a class="nav-link fw-bold" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="productos.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-primary" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="contactos.html">Contactos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO DEL BLOG -->
+    <div class="container mb-5">
+        
+        <div class="mb-4 mt-4 text-center">
+            <h1 class="custom-title">Blog Mecánico Cuchau</h1>
+            <p class="text-muted">Consejos, guías y tips para mantener tu motor rugiendo al máximo.</p>
+        </div>
+
+        <!-- 2 TARJETAS DE BLOG -->
+        <div class="row justify-content-center g-4 mt-2">
+            
+            <!-- Articulo 1 -->
+            <div class="col-md-6">
+                <div class="card h-100 border-0 shadow-sm product-card-hover">
+                    <img src="img/JuegoDePastillasBrembo.jpg" class="card-img-top" alt="Frenos" style="height: 250px; object-fit: contain; padding: 20px; background-color: #fff;">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <p class="text-muted small mb-1">Mantenimiento</p>
+                        <h4 class="card-title fw-bold">5 señales de que debes cambiar tus pastillas de freno</h4>
+                        <p class="card-text text-muted flex-grow-1">
+                            ¿Escuchas un chillido molesto al frenar o el pedal se siente esponjoso? Descubre cuáles son los síntomas clave que te advierten de que es momento de reemplazar tus pastillas antes de dañar los discos.
+                        </p>
+                        <p class="text-muted small mb-0">Publicado hace 2 días</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Articulo 2 -->
+            <div class="col-md-6">
+                <div class="card h-100 border-0 shadow-sm product-card-hover">
+                    <img src="img/BateriaHankook55MP.jpg" class="card-img-top" alt="Bateria" style="height: 250px; object-fit: contain; padding: 20px; background-color: #fff;">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <p class="text-muted small mb-1">Guías de Compra</p>
+                        <h4 class="card-title fw-bold">¿Cómo saber si es momento de cambiar la batería?</h4>
+                        <p class="card-text text-muted flex-grow-1">
+                            Quedarse botado por falta de batería es la peor pesadilla de cualquier conductor. Aprende a medir el voltaje y a reconocer si tu batería Hankook está llegando al final de su vida útil.
+                        </p>
+                        <p class="text-muted small mb-0">Publicado la semana pasada</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="footer-text mb-0">&copy; 2026 Repuestos Cuchau. Todos los derechos reservados.</p>
+            <p class="footer-text mt-1">Soporte y Garantía | Política de Privacidad</p>
+        </div>
+    </footer>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

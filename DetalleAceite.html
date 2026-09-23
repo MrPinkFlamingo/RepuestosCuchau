@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla de Producto - Repuestos Cuchau</title>
+    <!-- Bootstrap CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <!-- NAVBAR PRINCIPAL -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212529;">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="index.html">
+                <i class="bi bi-tools"></i> Repuestos Cuchau
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarPrincipal">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="login.html">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-light btn-sm" href="register.html">Regístrate</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a class="nav-link text-warning fs-5" href="register.html"><i class="bi bi-cart3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NAVBAR SECUNDARIO -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <ul class="navbar-nav flex-row w-100 justify-content-center flex-wrap" style="gap: 15px;">
+                <li class="nav-item"><a class="nav-link fw-bold text-primary" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="productos.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="contactos.html">Contactos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO DE PRODUCTO (PLANTILLA) -->
+    <div class="container mb-5">
+        <div class="row bg-white p-4 shadow-sm rounded-3">
+            
+            <!-- Imagen del Producto -->
+            <div class="col-md-5 text-center mb-4 mb-md-0 d-flex align-items-center justify-content-center">
+                <img src="img/AcaiteMobil5W-30.jpg" alt="Aceite Motor Mobil 1 5W-30" class="img-fluid rounded" style="object-fit: contain; max-height: 400px; padding: 15px;">
+            </div>
+            
+            <!-- Información y Botones -->
+            <div class="col-md-7">
+                <span class="badge bg-primary mb-2">Lubricantes</span>
+                <h2 class="fw-bold custom-title">Aceite Motor Mobil 1 5W-30 (5 Litros)</h2>
+                <h3 class="fw-bold text-dark mt-3">$45.990</h3>
+                <p class="text-muted mt-3">Aceite de motor 100% sintético avanzado diseñado para ofrecer un poder de limpieza excepcional, protección contra el desgaste y un rendimiento general superior. Ayuda a mantener tu motor funcionando como nuevo en cualquier condición de conducción.</p>
+                
+                <div class="d-flex align-items-center mt-4">
+                    <a href="register.html" class="btn btn-custom-action px-4 me-3"><i class="bi bi-cart-plus"></i> Añadir al Carrito</a>
+                    <span class="text-success fw-bold"><i class="bi bi-check-circle-fill"></i> Stock Disponible: 24</span>
+                </div>
+                
+                <hr class="mt-4">
+                
+                <!-- Especificaciones Técnicas (Dinámico a futuro) -->
+                <h5 class="fw-bold mt-4 mb-3">Especificaciones Técnicas</h5>
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="w-25 text-secondary">Fabricante</th>
+                            <td>ExxonMobil</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-secondary">Código SKU</th>
+                            <td>LUB-MOB-5W30-5L</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-secondary">Compatibilidad</th>
+                            <td>Motores a Gasolina y Diésel (Sin filtro DPF)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-secondary">Garantía</th>
+                            <td>No aplica (Consumible)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-secondary">Viscosidad SAE</th>
+                            <td>5W-30</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="footer-text mb-0">&copy; 2026 Repuestos Cuchau. Todos los derechos reservados.</p>
+            <p class="footer-text mt-1">Soporte y Garantía | Política de Privacidad</p>
+        </div>
+    </footer>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

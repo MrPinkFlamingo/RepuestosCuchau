@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos - Repuestos Cuchau</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- NAVBAR PRINCIPAL -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212529;">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="index.html">
+                <i class="bi bi-tools"></i> Repuestos Cuchau
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarPrincipal">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item"><a class="nav-link text-white" href="login.html">Iniciar Sesión</a></li>
+                    <li class="nav-item ms-2"><a class="btn btn-outline-light btn-sm" href="register.html">Regístrate</a></li>
+                    <li class="nav-item ms-3"><a class="nav-link text-warning fs-5" href="register.html"><i class="bi bi-cart3"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NAVBAR DE CATEGORÍAS -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <ul class="navbar-nav flex-row w-100 justify-content-center flex-wrap" style="gap: 15px;">
+                <li class="nav-item"><a class="nav-link fw-bold" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="productos.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-primary" href="contactos.html">Contactos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO CONTACTOS -->
+    <div class="container mb-5">
+        
+        <div class="mb-5 mt-4 text-center">
+            <h1 class="custom-title">Contáctanos</h1>
+            <p class="text-muted">¿Tienes dudas sobre un repuesto? Escríbenos y un mecánico te asesorará.</p>
+        </div>
+
+        <div class="row g-5">
+            <!-- Columna Información -->
+            <div class="col-md-5">
+                <div class="bg-light p-4 rounded-3 shadow-sm h-100">
+                    <h4 class="fw-bold mb-4">Información de la Tienda</h4>
+                    
+                    <div class="d-flex align-items-start mb-4">
+                        <i class="bi bi-geo-alt-fill text-warning fs-3 me-3"></i>
+                        <div>
+                            <h6 class="fw-bold mb-1">Dirección</h6>
+                            <p class="text-muted mb-0">Av. Los Motores 1024, Sector Industrial<br>Región Metropolitana, Chile</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start mb-4">
+                        <i class="bi bi-telephone-fill text-warning fs-3 me-3"></i>
+                        <div>
+                            <h6 class="fw-bold mb-1">Teléfono</h6>
+                            <p class="text-muted mb-0">+56 9 1234 5678</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start mb-4">
+                        <i class="bi bi-envelope-fill text-warning fs-3 me-3"></i>
+                        <div>
+                            <h6 class="fw-bold mb-1">Correo Electrónico</h6>
+                            <p class="text-muted mb-0">soporte@repuestoscuchau.cl</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-clock-fill text-warning fs-3 me-3"></i>
+                        <div>
+                            <h6 class="fw-bold mb-1">Horario de Atención</h6>
+                            <p class="text-muted mb-0">Lunes a Viernes: 09:00 - 18:30<br>Sábados: 09:00 - 14:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Formulario -->
+            <div class="col-md-7">
+                <div class="card border-0 shadow-sm p-4">
+                    <h4 class="fw-bold mb-4">Envíanos un Mensaje</h4>
+                    <div id="alerta-formulario"></div>
+                    <form id="form-contacto" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="nombreContacto" class="form-label fw-bold">Nombre Completo</label>
+                            <input type="text" class="form-control" id="nombreContacto" placeholder="Ej: Juan Pérez" required>
+                            <div class="invalid-feedback">Por favor, ingresa tu nombre.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="correoContacto" class="form-label fw-bold">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correoContacto" placeholder="ejemplo@correo.com" required>
+                            <div class="invalid-feedback">Ingresa un correo válido (@duoc.cl, @profesor.duoc.cl, @gmail.com).</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="asuntoContacto" class="form-label fw-bold">Asunto / Repuesto</label>
+                            <input type="text" class="form-control" id="asuntoContacto" placeholder="Ej: Consulta por Pastillas Brembo" required>
+                            <div class="invalid-feedback">El asunto es obligatorio.</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="mensajeContacto" class="form-label fw-bold">Mensaje</label>
+                            <textarea class="form-control" id="mensajeContacto" rows="4" placeholder="Escribe tu consulta aquí..." required></textarea>
+                            <div class="invalid-feedback">No olvides escribir tu mensaje.</div>
+                        </div>
+                        <button type="submit" class="btn btn-custom-action w-100 fw-bold py-2">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="footer-text mb-0">&copy; 2026 Repuestos Cuchau. Todos los derechos reservados.</p>
+            <p class="footer-text mt-1">Soporte y Garantía | Política de Privacidad</p>
+        </div>
+    </footer>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="validaciones.js"></script>
+</body>
+</html>

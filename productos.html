@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Repuestos Cuchau</title>
+    <!-- Bootstrap CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link href="style.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- NAVBAR PRINCIPAL (Buscador, Login, Carrito) -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212529;">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold text-warning" href="index.html">
+                <i class="bi bi-tools"></i> Repuestos Cuchau
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarPrincipal">
+                <!-- Enlaces y Botones -->
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="login.html">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-light btn-sm" href="register.html">Regístrate</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a class="nav-link text-warning fs-5" href="register.html"><i class="bi bi-cart3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NAVBAR DE CATEGORÍAS (Secundario) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <ul class="navbar-nav flex-row w-100 justify-content-center flex-wrap" style="gap: 15px;">
+                <li class="nav-item"><a class="nav-link fw-bold" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-primary" href="productos.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold" href="contactos.html">Contactos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <!-- SECCIÓN: TODOS LOS PRODUCTOS -->
+        <div class="mb-4 mt-4">
+            <h3 class="custom-title mb-0">Catálogo de Productos</h3>
+            <p class="text-muted">Explora todos nuestros repuestos disponibles.</p>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 mb-5">
+            
+            <!-- Producto 1 -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm product-card-hover">
+                    <img src="img/FiltroAceiteBoschPremium.jpg" class="card-img-top" alt="Filtro de Aceite" style="object-fit: contain; height: 200px; padding: 15px; background-color: #fff;">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title text-truncate">Filtro de Aceite Bosch Premium</h6>
+                        <p class="card-text text-muted small mb-2">Para motores bencineros 1.6 y 2.0</p>
+                        <div class="mt-auto">
+                            <span class="fs-4 fw-bold text-dark">$8.990</span>
+                            <a href="register.html" class="btn btn-custom-action w-100 mt-2 d-block"><i class="bi bi-cart-plus"></i> Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm product-card-hover">
+                    <img src="img/JuegoDePastillasBrembo.jpg" class="card-img-top" alt="Pastillas" style="object-fit: contain; height: 200px; padding: 15px; background-color: #fff;">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title text-truncate">Juego Pastillas de Freno Brembo</h6>
+                        <p class="card-text text-muted small mb-2">Alta durabilidad, cero ruidos.</p>
+                        <div class="mt-auto">
+                            <span class="fs-4 fw-bold text-dark">$35.000</span>
+                            <a href="register.html" class="btn btn-custom-action w-100 mt-2 d-block"><i class="bi bi-cart-plus"></i> Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm product-card-hover">
+                    <img src="img/BateriaHankook55MP.jpg" class="card-img-top" alt="Bateria" style="object-fit: contain; height: 200px; padding: 15px; background-color: #fff;">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title text-truncate">Batería Hankook 55AMP</h6>
+                        <p class="card-text text-muted small mb-2">Libre de mantención, partida rápida.</p>
+                        <div class="mt-auto">
+                            <span class="fs-4 fw-bold text-dark">$55.990</span>
+                            <a href="register.html" class="btn btn-custom-action w-100 mt-2 d-block"><i class="bi bi-cart-plus"></i> Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm product-card-hover">
+                    <img src="img/AcaiteMobil5W-30.jpg" class="card-img-top" alt="Aceite" style="object-fit: contain; height: 200px; padding: 15px; background-color: #fff;">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title text-truncate">Aceite Mobil 1 Sintético 5W-30 (4L)</h6>
+                        <p class="card-text text-muted small mb-2">Máximo rendimiento y protección.</p>
+                        <div class="mt-auto">
+                            <span class="fs-4 fw-bold text-dark">$42.500</span>
+                            <a href="register.html" class="btn btn-custom-action w-100 mt-2 d-block"><i class="bi bi-cart-plus"></i> Comprar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="footer-text mb-0">&copy; 2026 Repuestos Cuchau. Todos los derechos reservados.</p>
+            <p class="footer-text mt-1">Soporte y Garantía | Política de Privacidad</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="validaciones.js"></script>
+</body>
+</html>

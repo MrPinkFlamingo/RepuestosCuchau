@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Vendedor - Cuchau</title>
+    <!-- Bootstrap CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link href="style.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <!-- NAVBAR VENDEDOR (Misma estética que index) -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212529;">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="#">
+                <i class="bi bi-person-workspace"></i> Panel Vendedor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navVendedor">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navVendedor">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="gestion_productos.html?rol=vendedor">Lista de Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gestion_ordenes.html?rol=vendedor">Lista de Órdenes</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO VENDEDOR -->
+    <div class="container mt-5 flex-grow-1 mb-5">
+        <h2 class="mb-4 custom-title text-center text-md-start">Bienvenido, Vendedor</h2>
+        
+        <div class="row g-4 text-center justify-content-center">
+            <!-- Opción 1: Lista de Productos -->
+            <div class="col-md-5">
+                <div class="card shadow-sm h-100 border-0 p-4 product-card-hover">
+                    <i class="bi bi-box-seam text-warning" style="font-size: 3rem;"></i>
+                    <h5 class="fw-bold mt-3">Lista de Productos</h5>
+                    <p class="text-muted small">Visualizar el catálogo completo de repuestos y sus detalles técnicos.</p>
+                    <a href="gestion_productos.html?rol=vendedor" class="btn btn-outline-dark mt-2 w-50 mx-auto">Ver Productos</a>
+                </div>
+            </div>
+            
+            <!-- Opción 2: Lista de Órdenes -->
+            <div class="col-md-5">
+                <div class="card shadow-sm h-100 border-0 p-4 product-card-hover">
+                    <i class="bi bi-receipt text-warning" style="font-size: 3rem;"></i>
+                    <h5 class="fw-bold mt-3">Lista de Órdenes</h5>
+                    <p class="text-muted small">Revisar el historial de ventas, órdenes generadas y su estado detallado.</p>
+                    <a href="gestion_ordenes.html?rol=vendedor" class="btn btn-outline-dark mt-2 w-50 mx-auto">Ver Órdenes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER IDENTICO AL RESTO -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="footer-text mb-0">&copy; 2026 Repuestos Cuchau. Todos los derechos reservados.</p>
+            <p class="footer-text mt-1">Soporte y Garantía | Política de Privacidad</p>
+        </div>
+    </footer>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
