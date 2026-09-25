@@ -27,10 +27,12 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombres:</label>
                                     <input type="text" class="form-control" id="nombre" placeholder="Ej. Juan Andrés" required maxlength="50">
+                                    <div class="invalid-feedback">Por favor, ingresa tus nombres.</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Apellidos:</label>
                                     <input type="text" class="form-control" id="apellidos" placeholder="Ej. Pérez Silva" required maxlength="100">
+                                    <div class="invalid-feedback">Por favor, ingresa tus apellidos.</div>
                                 </div>
                             </div>
 
@@ -38,12 +40,14 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">RUT (Run):</label>
-                                    <input type="text" class="form-control" id="rut" placeholder="19011022K" required minlength="7" maxlength="9">
+                                    <input type="text" class="form-control" id="rut" placeholder="123456785" required minlength="7" maxlength="9">
+                                    <div class="invalid-feedback">RUT inválido. Debe ser real y sin puntos ni guion.</div>
                                     <div class="form-text">Sin puntos ni guion.</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Fecha de Nacimiento:</label>
                                     <input type="text" class="form-control" id="fechaNacimiento" placeholder="DD-MM-AAAA" required maxlength="10">
+                                    <div class="invalid-feedback">Formato inválido o fecha incorrecta. Usa DD-MM-AAAA.</div>
                                 </div>
                             </div>
 
@@ -52,10 +56,12 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Correo Electrónico:</label>
                                     <input type="email" class="form-control" id="correo" placeholder="ejemplo@duoc.cl" required maxlength="100">
+                                    <div class="invalid-feedback">Solo dominios @duoc.cl, @profesor.duoc.cl o @gmail.com.</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Confirmar Correo:</label>
                                     <input type="email" class="form-control" id="confirmarCorreo" placeholder="Repite tu correo" required maxlength="100">
+                                    <div class="invalid-feedback">Los correos no coinciden.</div>
                                 </div>
                             </div>
 
@@ -64,10 +70,12 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Contraseña:</label>
                                     <input type="password" class="form-control" id="contrasena" placeholder="Crea una contraseña" required>
+                                    <div class="invalid-feedback">Por favor, ingresa una contraseña.</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Confirmar Contraseña:</label>
                                     <input type="password" class="form-control" id="confirmarContrasena" placeholder="Vuelve a escribirla" required>
+                                    <div class="invalid-feedback">Las contraseñas no coinciden.</div>
                                 </div>
                             </div>
 
@@ -81,6 +89,7 @@
                                         <option value="biobio">Región del Bío Bío</option>
                                         <option value="araucania">Región de La Araucanía</option>
                                     </select>
+                                    <div class="invalid-feedback">Por favor, selecciona una región.</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Ciudad:</label>
@@ -105,6 +114,7 @@
                                             <option value="pucon">Pucón</option>
                                         </optgroup>
                                     </select>
+                                    <div class="invalid-feedback">Por favor, selecciona una ciudad.</div>
                                 </div>
                             </div>
 
