@@ -1,0 +1,28 @@
+{
+  "cSpell.enabled": false,
+  "cSpell.checkOnlyEnabledFileTypes": true,
+  "cSpell.enabledLanguageIds": [],
+  "cSpell.language": "es,en",
+  "cSpell.words": [
+    "Barra",
+    "Navegacion",
+    "componentes",
+    "Pagina",
+    "Alerta",
+    "obtener",
+    "Productos",
+    "Inventario",
+    "guardar",
+    "Producto",
+    "Cuchau",
+    "Repuestos",
+    "Tarjeta",
+    "Metrica",
+    "Elemento",
+    "Carrito",
+    "utilidades",
+    "validaciones"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.validate.enable": true
+}
