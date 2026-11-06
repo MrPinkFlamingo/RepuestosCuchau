@@ -16,7 +16,7 @@ function Inicio() {
         {/* BANNER PROMOCIONAL */}
         <Banner />
 
-        {/* SECCIÓN CATEGORÍAS RÁPIDAS (FIGURA 1 DE LA RÚBRICA) */}
+        {/* SECCIÓN CATEGORÍAS RÁPIDAS */}
         <section className="mb-5">
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h3 className="custom-title mb-0">Categorías Principales</h3>
@@ -29,40 +29,36 @@ function Inicio() {
             <div className="col">
               <Link
                 to="/categorias"
-                className="text-decoration-none card h-100 p-3 shadow-sm border-0 bg-light text-dark product-card-hover"
+                className="text-decoration-none card h-100 p-3 shadow-sm border-0 bg-light text-dark product-card-hover justify-content-center"
               >
-                <i className="bi bi-funnel fs-1 text-primary mb-2"></i>
-                <h6 className="fw-bold mb-0">Filtros</h6>
+                <h6 className="fw-bold mb-1">Filtros</h6>
                 <small className="text-muted">Aire, Aceite, Combustible</small>
               </Link>
             </div>
             <div className="col">
               <Link
                 to="/categorias"
-                className="text-decoration-none card h-100 p-3 shadow-sm border-0 bg-light text-dark product-card-hover"
+                className="text-decoration-none card h-100 p-3 shadow-sm border-0 bg-light text-dark product-card-hover justify-content-center"
               >
-                <i className="bi bi-disc fs-1 text-danger mb-2"></i>
-                <h6 className="fw-bold mb-0">Frenos</h6>
+                <h6 className="fw-bold mb-1">Frenos</h6>
                 <small className="text-muted">Pastillas, Discos, Líquidos</small>
               </Link>
             </div>
             <div className="col">
               <Link
                 to="/categorias"
-                className="text-decoration-none card h-100 p-3 shadow-sm border-0 bg-light text-dark product-card-hover"
+                className="text-decoration-none card h-100 p-3 shadow-sm border-0 bg-light text-dark product-card-hover justify-content-center"
               >
-                <i className="bi bi-lightning-charge fs-1 text-warning mb-2"></i>
-                <h6 className="fw-bold mb-0">Baterías</h6>
+                <h6 className="fw-bold mb-1">Baterías</h6>
                 <small className="text-muted">45AH, 55AH, 70AH</small>
               </Link>
             </div>
             <div className="col">
               <Link
                 to="/categorias"
-                className="text-decoration-none card h-100 p-3 shadow-sm border-0 bg-light text-dark product-card-hover"
+                className="text-decoration-none card h-100 p-3 shadow-sm border-0 bg-light text-dark product-card-hover justify-content-center"
               >
-                <i className="bi bi-droplet-half fs-1 text-info mb-2"></i>
-                <h6 className="fw-bold mb-0">Lubricantes</h6>
+                <h6 className="fw-bold mb-1">Lubricantes</h6>
                 <small className="text-muted">Sintéticos 5W-30, 10W-40</small>
               </Link>
             </div>
@@ -86,22 +82,6 @@ function Inicio() {
               <TarjetaProducto key={producto.id} producto={producto} />
             ))}
           </div>
-        </section>
-
-        {/* BANNER SECUNDARIO DE PROMOCIÓN A OFERTAS */}
-        <section className="p-4 rounded bg-warning-subtle border border-warning d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-          <div className="d-flex align-items-center gap-3">
-            <i className="bi bi-percent fs-1 text-danger"></i>
-            <div>
-              <h5 className="fw-bold mb-1">¿Buscando los mejores precios de la temporada?</h5>
-              <p className="text-muted mb-0 small">
-                Revisa nuestra sección exclusiva con repuestos certificados en oferta hasta agotar stock.
-              </p>
-            </div>
-          </div>
-          <Link to="/ofertas" className="btn btn-danger text-nowrap fw-semibold px-4">
-            <i className="bi bi-fire me-1"></i> Ir a Ofertas
-          </Link>
         </section>
       </main>
 

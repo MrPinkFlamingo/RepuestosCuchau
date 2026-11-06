@@ -1,22 +1,34 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import BarraNavegacion from "../componentes/BarraNavegacion";
 import PiePagina from "../componentes/PiePagina";
 import Alerta from "../componentes/Alerta";
 import { PRODUCTOS } from "../datos/Productos";
-import { agregarAlCarrito, obtenerProductosInventario } from "../datos/db";
+import { agregarAlCarrito, obtenerProductosInventario, obtenerUsuarioActual } from "../datos/db";
 
 function DetalleProducto() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [cantidad, setCantidad] = useState(1);
   const [mensajeExito, setMensajeExito] = useState(false);
+  const [errorStock, setErrorStock] = useState<string | null>(null);
 
   // Buscar el producto por ID en el inventario activo (o respaldo estático)
   const inventario = obtenerProductosInventario();
   const producto = inventario.find((p) => String(p.id) === String(id)) || PRODUCTOS.find((p) => String(p.id) === String(id)) || PRODUCTOS[0];
 
   const handleAgregar = () => {
-    agregarAlCarrito(producto, cantidad);
+    const usuario = obtenerUsuarioActual();
+    if (!usuario) {
+      navigate("/registro");
+      return;
+    }
+    const res = agregarAlCarrito(producto, cantidad);
+    if (!res.ok) {
+      setErrorStock(res.mensaje || `No puedes agregar más: solo hay ${producto.stock} unidades disponibles.`);
+      setTimeout(() => setErrorStock(null), 3000);
+      return;
+    }
     setMensajeExito(true);
     setTimeout(() => setMensajeExito(false), 2500);
   };
@@ -49,6 +61,14 @@ function DetalleProducto() {
           />
         )}
 
+        {errorStock && (
+          <Alerta
+            tipo="danger"
+            mensaje={errorStock}
+            onCerrar={() => setErrorStock(null)}
+          />
+        )}
+
         <div className="row g-5 align-items-start mt-1">
           {/* FOTO DEL REPUESTO */}
           <div className="col-md-6 text-center">
@@ -72,7 +92,7 @@ function DetalleProducto() {
             <span className="badge bg-secondary-subtle text-secondary mb-2 fs-6">
               {producto.categoria}
             </span>
-            <h2 className="fw-bold mb-2">{producto.nombre}</h2>
+            <h2 className="fw-bold custom-title mb-2">{producto.nombre}</h2>
             <p className="text-muted fs-5">{producto.descripcion}</p>
 
             <hr />

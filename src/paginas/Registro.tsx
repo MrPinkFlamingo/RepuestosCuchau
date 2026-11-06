@@ -2,7 +2,7 @@ import { useState, type FormEvent, type ChangeEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Alerta from "../componentes/Alerta";
 import { registrarUsuario } from "../datos/db";
-import { validarRUT, validarCorreo, validarFechaNacimiento } from "../utilidades/validaciones";
+import { validarRUT, formatearRUT, validarCorreo, validarFechaNacimiento } from "../utilidades/validaciones";
 
 function Registro() {
   const [nombre, setNombre] = useState("");
@@ -17,8 +17,35 @@ function Registro() {
   const [ciudad, setCiudad] = useState("");
   const [direccion, setDireccion] = useState("");
 
+  // Registro de campos interactuados por el usuario
+  const [tocado, setTocado] = useState<Record<string, boolean>>({});
   const [alerta, setAlerta] = useState<{ tipo: "danger" | "success"; texto: string } | null>(null);
   const navigate = useNavigate();
+
+  // Estados derivados de validación (principios de React puro)
+  const nombreValido = nombre.trim().length >= 2;
+  const apellidosValido = apellidos.trim().length >= 2;
+  const rutValido = validarRUT(rut);
+  const fechaValida = validarFechaNacimiento(fechaNacimiento);
+  const correoValido = validarCorreo(correo);
+  const confirmarCorreoValido =
+    correoValido && confirmarCorreo.trim().toLowerCase() === correo.trim().toLowerCase();
+  const contrasenaValida = contrasena.length >= 4;
+  const confirmarContrasenaValida =
+    contrasenaValida && confirmarContrasena === contrasena;
+  const regionValida = region.trim() !== "";
+  const ciudadValida = ciudad.trim() !== "";
+  const direccionValida = direccion.trim().length >= 5;
+
+  const marcarTocado = (campo: string) => {
+    setTocado((prev) => (prev[campo] ? prev : { ...prev, [campo]: true }));
+  };
+
+  // Helper de clases estándar de Bootstrap: is-valid (verde) o is-invalid (rojo)
+  const obtenerClaseValidacion = (campo: string, esValido: boolean) => {
+    if (!tocado[campo]) return "";
+    return esValido ? "is-valid" : "is-invalid";
+  };
 
   // Autoguionado para la fecha de nacimiento (DD-MM-AAAA)
   const handleFechaChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,23 +54,39 @@ function Registro() {
       valor = valor + "-";
     }
     setFechaNacimiento(valor);
+    marcarTocado("fechaNacimiento");
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setAlerta(null);
 
+    // Marcar todos los campos como interactuados para iluminar errores si los hay
+    setTocado({
+      nombre: true,
+      apellidos: true,
+      rut: true,
+      fechaNacimiento: true,
+      correo: true,
+      confirmarCorreo: true,
+      contrasena: true,
+      confirmarContrasena: true,
+      region: true,
+      ciudad: true,
+      direccion: true,
+    });
+
     // 1. Validar RUT
-    if (!validarRUT(rut)) {
+    if (!rutValido) {
       setAlerta({
         tipo: "danger",
-        texto: "RUT inválido. Debe ser real, sin puntos ni guion (ej: 123456785 o 12345678K).",
+        texto: "RUT inválido. Verifica los números y el dígito verificador (ej: 12.345.678-5 o 12345678-5).",
       });
       return;
     }
 
     // 2. Validar Fecha
-    if (!validarFechaNacimiento(fechaNacimiento)) {
+    if (!fechaValida) {
       setAlerta({
         tipo: "danger",
         texto: "Formato de fecha de nacimiento inválido. Debe ser DD-MM-AAAA.",
@@ -52,7 +95,7 @@ function Registro() {
     }
 
     // 3. Validar Correo y Coincidencia
-    if (!validarCorreo(correo)) {
+    if (!correoValido) {
       setAlerta({
         tipo: "danger",
         texto: "Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com",
@@ -60,25 +103,31 @@ function Registro() {
       return;
     }
 
-    if (correo.toLowerCase() !== confirmarCorreo.toLowerCase()) {
+    if (!confirmarCorreoValido) {
       setAlerta({ tipo: "danger", texto: "Los correos electrónicos ingresados no coinciden." });
       return;
     }
 
     // 4. Validar Contraseñas
-    if (contrasena.length < 4) {
+    if (!contrasenaValida) {
       setAlerta({ tipo: "danger", texto: "La contraseña debe tener al menos 4 caracteres." });
       return;
     }
 
-    if (contrasena !== confirmarContrasena) {
+    if (!confirmarContrasenaValida) {
       setAlerta({ tipo: "danger", texto: "Las contraseñas no coinciden." });
       return;
     }
 
-    // 5. Guardar en la base de datos simulada
+    // 5. Validar Región, Ciudad y Dirección
+    if (!regionValida || !ciudadValida || !direccionValida) {
+      setAlerta({ tipo: "danger", texto: "Por favor completa la dirección completa de despacho." });
+      return;
+    }
+
+    // 6. Guardar en la base de datos simulada
     const res = registrarUsuario({
-      rut,
+      rut: formatearRUT(rut),
       nombre,
       apellidos,
       correo,
@@ -127,18 +176,22 @@ function Registro() {
                 />
               )}
 
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} noValidate>
                 {/* Nombres y Apellidos */}
                 <div className="row">
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-bold">Nombres:</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${obtenerClaseValidacion("nombre", nombreValido)}`}
                       id="nombre"
                       placeholder="Ej. Juan Andrés"
                       value={nombre}
-                      onChange={(e) => setNombre(e.target.value)}
+                      onChange={(e) => {
+                        setNombre(e.target.value);
+                        marcarTocado("nombre");
+                      }}
+                      onBlur={() => marcarTocado("nombre")}
                       required
                       maxLength={50}
                     />
@@ -147,11 +200,15 @@ function Registro() {
                     <label className="form-label fw-bold">Apellidos:</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${obtenerClaseValidacion("apellidos", apellidosValido)}`}
                       id="apellidos"
                       placeholder="Ej. Pérez Silva"
                       value={apellidos}
-                      onChange={(e) => setApellidos(e.target.value)}
+                      onChange={(e) => {
+                        setApellidos(e.target.value);
+                        marcarTocado("apellidos");
+                      }}
+                      onBlur={() => marcarTocado("apellidos")}
                       required
                       maxLength={100}
                     />
@@ -164,26 +221,35 @@ function Registro() {
                     <label className="form-label fw-bold">RUT (Run):</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${obtenerClaseValidacion("rut", rutValido)}`}
                       id="rut"
-                      placeholder="123456785"
+                      placeholder="12.345.678-5"
                       value={rut}
-                      onChange={(e) => setRut(e.target.value)}
+                      onChange={(e) => {
+                        setRut(e.target.value);
+                        marcarTocado("rut");
+                      }}
+                      onBlur={() => {
+                        marcarTocado("rut");
+                        if (rut.trim().length >= 7) {
+                          setRut(formatearRUT(rut));
+                        }
+                      }}
                       required
-                      minLength={7}
-                      maxLength={9}
+                      maxLength={12}
                     />
-                    <div className="form-text">Sin puntos ni guion.</div>
+                    <div className="form-text">Con o sin puntos y guion (ej: 12.345.678-5).</div>
                   </div>
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-bold">Fecha de Nacimiento:</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className={`form-control ${obtenerClaseValidacion("fechaNacimiento", fechaValida)}`}
                       id="fechaNacimiento"
                       placeholder="DD-MM-AAAA"
                       value={fechaNacimiento}
                       onChange={handleFechaChange}
+                      onBlur={() => marcarTocado("fechaNacimiento")}
                       required
                       maxLength={10}
                     />
@@ -197,11 +263,15 @@ function Registro() {
                     <label className="form-label fw-bold">Correo Electrónico:</label>
                     <input
                       type="email"
-                      className="form-control"
+                      className={`form-control ${obtenerClaseValidacion("correo", correoValido)}`}
                       id="correo"
                       placeholder="ejemplo@duoc.cl"
                       value={correo}
-                      onChange={(e) => setCorreo(e.target.value)}
+                      onChange={(e) => {
+                        setCorreo(e.target.value);
+                        marcarTocado("correo");
+                      }}
+                      onBlur={() => marcarTocado("correo")}
                       required
                       maxLength={100}
                     />
@@ -213,11 +283,15 @@ function Registro() {
                     <label className="form-label fw-bold">Confirmar Correo:</label>
                     <input
                       type="email"
-                      className="form-control"
+                      className={`form-control ${obtenerClaseValidacion("confirmarCorreo", confirmarCorreoValido)}`}
                       id="confirmarCorreo"
                       placeholder="Repite tu correo"
                       value={confirmarCorreo}
-                      onChange={(e) => setConfirmarCorreo(e.target.value)}
+                      onChange={(e) => {
+                        setConfirmarCorreo(e.target.value);
+                        marcarTocado("confirmarCorreo");
+                      }}
+                      onBlur={() => marcarTocado("confirmarCorreo")}
                       required
                       maxLength={100}
                     />
@@ -230,23 +304,32 @@ function Registro() {
                     <label className="form-label fw-bold">Contraseña:</label>
                     <input
                       type="password"
-                      className="form-control"
+                      className={`form-control ${obtenerClaseValidacion("contrasena", contrasenaValida)}`}
                       id="contrasena"
                       placeholder="Crea una contraseña"
                       value={contrasena}
-                      onChange={(e) => setContrasena(e.target.value)}
+                      onChange={(e) => {
+                        setContrasena(e.target.value);
+                        marcarTocado("contrasena");
+                      }}
+                      onBlur={() => marcarTocado("contrasena")}
                       required
                     />
+                    <div className="form-text">Mínimo 4 caracteres.</div>
                   </div>
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-bold">Confirmar Contraseña:</label>
                     <input
                       type="password"
-                      className="form-control"
+                      className={`form-control ${obtenerClaseValidacion("confirmarContrasena", confirmarContrasenaValida)}`}
                       id="confirmarContrasena"
                       placeholder="Vuelve a escribirla"
                       value={confirmarContrasena}
-                      onChange={(e) => setConfirmarContrasena(e.target.value)}
+                      onChange={(e) => {
+                        setConfirmarContrasena(e.target.value);
+                        marcarTocado("confirmarContrasena");
+                      }}
+                      onBlur={() => marcarTocado("confirmarContrasena")}
                       required
                     />
                   </div>
@@ -257,9 +340,13 @@ function Registro() {
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-bold">Región:</label>
                     <select
-                      className="form-select"
+                      className={`form-select ${obtenerClaseValidacion("region", regionValida)}`}
                       value={region}
-                      onChange={(e) => setRegion(e.target.value)}
+                      onChange={(e) => {
+                        setRegion(e.target.value);
+                        marcarTocado("region");
+                      }}
+                      onBlur={() => marcarTocado("region")}
                       required
                     >
                       <option value="" disabled>Selecciona tu región...</option>
@@ -271,9 +358,13 @@ function Registro() {
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-bold">Ciudad / Comuna:</label>
                     <select
-                      className="form-select"
+                      className={`form-select ${obtenerClaseValidacion("ciudad", ciudadValida)}`}
                       value={ciudad}
-                      onChange={(e) => setCiudad(e.target.value)}
+                      onChange={(e) => {
+                        setCiudad(e.target.value);
+                        marcarTocado("ciudad");
+                      }}
+                      onBlur={() => marcarTocado("ciudad")}
                       required
                     >
                       <option value="" disabled>Selecciona tu ciudad...</option>
@@ -300,13 +391,17 @@ function Registro() {
                 <div className="mb-3">
                   <label className="form-label fw-bold">Dirección exacta:</label>
                   <textarea
-                    className="form-control"
+                    className={`form-control ${obtenerClaseValidacion("direccion", direccionValida)}`}
                     id="direccion"
                     rows={2}
                     maxLength={300}
                     placeholder="Ej: Av. Los Motores 1024, Depto 302..."
                     value={direccion}
-                    onChange={(e) => setDireccion(e.target.value)}
+                    onChange={(e) => {
+                      setDireccion(e.target.value);
+                      marcarTocado("direccion");
+                    }}
+                    onBlur={() => marcarTocado("direccion")}
                     required
                   ></textarea>
                 </div>

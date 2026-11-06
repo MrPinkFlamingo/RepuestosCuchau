@@ -39,7 +39,7 @@ function PanelAdmin() {
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center my-4 gap-2">
           <div>
             <h2 className="custom-title mb-1">
-              <i className="bi bi-speedometer2 text-warning me-2"></i> Dashboard Administrativo
+              Dashboard Administrativo
             </h2>
             <p className="text-muted mb-0">
               Resumen de actividades diarias, control de inventario y compras en tiempo real.
@@ -67,7 +67,8 @@ function PanelAdmin() {
               valor={totalProductos}
               subtitulo="Inventario total disponible"
               icono="bi-box-seam-fill"
-              colorFondo="bg-success"
+              colorFondo="bg-dark"
+              colorTexto="text-white"
             />
           </div>
           <div className="col-md-4">
@@ -111,7 +112,7 @@ function PanelAdmin() {
             <div className="card h-100 border-0 shadow-sm p-3">
               <div className="card-body d-flex flex-column">
                 <div className="d-flex align-items-center mb-3">
-                  <i className="bi bi-receipt fs-1 text-success me-3"></i>
+                  <i className="bi bi-receipt fs-1 text-warning me-3"></i>
                   <div>
                     <h5 className="fw-bold mb-0">Órdenes y Boletas</h5>
                     <small className="text-muted">Compras y despacho de clientes</small>
@@ -120,7 +121,7 @@ function PanelAdmin() {
                 <p className="text-muted small flex-grow-1">
                   Revisa las compras realizadas en la tienda, el detalle de productos y las direcciones de entrega.
                 </p>
-                <Link to="/admin/ordenes" className="btn btn-outline-success w-100">
+                <Link to="/admin/ordenes" className="btn btn-outline-warning w-100">
                   Ver Registro de Órdenes <i className="bi bi-arrow-right"></i>
                 </Link>
               </div>

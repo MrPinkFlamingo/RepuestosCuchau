@@ -41,7 +41,7 @@ export interface OrdenCompra {
 // Claves de LocalStorage
 const STORAGE_USUARIOS = "cuchau_usuarios_v2";
 const STORAGE_USUARIO_ACTUAL = "cuchau_usuario_actual_v2";
-const STORAGE_CARRITO = "cuchau_carrito_v2";
+const STORAGE_CARRITO_BASE = "cuchau_carrito_v2";
 const STORAGE_ORDENES = "cuchau_ordenes_v2";
 const STORAGE_PRODUCTOS = "cuchau_productos_v2";
 
@@ -165,11 +165,21 @@ export function obtenerUsuarioActual(): Usuario | null {
 }
 
 // ==========================================
-// 2. MÓDULO DEL CARRITO (REACTIVO)
+// 2. MÓDULO DEL CARRITO (INDEPENDIENTE POR CLIENTE Y CON CONTROL DE STOCK)
 // ==========================================
 
+// Obtiene la clave de almacenamiento única del carrito para el cliente actual
+function obtenerClaveCarrito(): string {
+  const usuario = obtenerUsuarioActual();
+  if (usuario && usuario.id) {
+    return `${STORAGE_CARRITO_BASE}_${usuario.id}`;
+  }
+  return `${STORAGE_CARRITO_BASE}_invitado`;
+}
+
 export function obtenerCarrito(): ItemCarrito[] {
-  const guardado = localStorage.getItem(STORAGE_CARRITO);
+  const key = obtenerClaveCarrito();
+  const guardado = localStorage.getItem(key);
   if (!guardado) return [];
   try {
     return JSON.parse(guardado);
@@ -178,44 +188,78 @@ export function obtenerCarrito(): ItemCarrito[] {
   }
 }
 
-export function agregarAlCarrito(producto: Producto, cantidad: number = 1): void {
+export function agregarAlCarrito(producto: Producto, cantidad: number = 1): { ok: boolean; mensaje?: string } {
+  const key = obtenerClaveCarrito();
   const carrito = obtenerCarrito();
   const index = carrito.findIndex((item) => String(item.producto.id) === String(producto.id));
 
-  if (index >= 0) {
-    carrito[index].cantidad += cantidad;
-  } else {
-    carrito.push({ producto, cantidad });
+  // Obtener el stock real disponible en el inventario activo
+  const inventario = obtenerProductosInventario();
+  const prodInventario = inventario.find((p) => String(p.id) === String(producto.id));
+  const stockDisponible = prodInventario ? prodInventario.stock : producto.stock;
+
+  const cantidadActualEnCarrito = index >= 0 ? carrito[index].cantidad : 0;
+
+  // Si ya tiene todo el stock en el carrito, rechazar
+  if (cantidadActualEnCarrito >= stockDisponible) {
+    return {
+      ok: false,
+      mensaje: `No puedes agregar más: has alcanzado el límite disponible en stock (${stockDisponible} unidades).`,
+    };
   }
 
-  localStorage.setItem(STORAGE_CARRITO, JSON.stringify(carrito));
+  // Limitar al stock máximo disponible
+  const cantidadFinal = Math.min(cantidadActualEnCarrito + cantidad, stockDisponible);
+
+  if (index >= 0) {
+    carrito[index].cantidad = cantidadFinal;
+  } else {
+    carrito.push({ producto, cantidad: cantidadFinal });
+  }
+
+  localStorage.setItem(key, JSON.stringify(carrito));
   notificarCambio();
+  return { ok: true };
 }
 
-export function actualizarCantidadCarrito(productoId: string | number, cantidad: number): void {
+export function actualizarCantidadCarrito(productoId: string | number, cantidad: number): { ok: boolean; cantidadAjustada: number } {
+  const key = obtenerClaveCarrito();
   const carrito = obtenerCarrito();
   const index = carrito.findIndex((item) => String(item.producto.id) === String(productoId));
 
   if (index >= 0) {
     if (cantidad <= 0) {
       carrito.splice(index, 1);
-    } else {
-      carrito[index].cantidad = cantidad;
+      localStorage.setItem(key, JSON.stringify(carrito));
+      notificarCambio();
+      return { ok: true, cantidadAjustada: 0 };
     }
-    localStorage.setItem(STORAGE_CARRITO, JSON.stringify(carrito));
+
+    const inventario = obtenerProductosInventario();
+    const prodInventario = inventario.find((p) => String(p.id) === String(productoId));
+    const stockDisponible = prodInventario ? prodInventario.stock : carrito[index].producto.stock;
+
+    const cantidadFinal = Math.min(cantidad, stockDisponible);
+    carrito[index].cantidad = cantidadFinal;
+
+    localStorage.setItem(key, JSON.stringify(carrito));
     notificarCambio();
+    return { ok: cantidad <= stockDisponible, cantidadAjustada: cantidadFinal };
   }
+  return { ok: false, cantidadAjustada: 0 };
 }
 
 export function eliminarDelCarrito(productoId: string | number): void {
+  const key = obtenerClaveCarrito();
   const carrito = obtenerCarrito();
   const filtrado = carrito.filter((item) => String(item.producto.id) !== String(productoId));
-  localStorage.setItem(STORAGE_CARRITO, JSON.stringify(filtrado));
+  localStorage.setItem(key, JSON.stringify(filtrado));
   notificarCambio();
 }
 
 export function vaciarCarrito(): void {
-  localStorage.removeItem(STORAGE_CARRITO);
+  const key = obtenerClaveCarrito();
+  localStorage.removeItem(key);
   notificarCambio();
 }
 
@@ -301,7 +345,17 @@ export function crearOrden(
   ordenes.unshift(nuevaOrden);
   localStorage.setItem(STORAGE_ORDENES, JSON.stringify(ordenes));
 
-  // Vaciar carrito tras la compra exitosa
+  // Descontar automáticamente las unidades compradas del inventario real
+  const inventario = obtenerProductosInventario();
+  items.forEach((it) => {
+    const prod = inventario.find((p) => String(p.id) === String(it.producto.id));
+    if (prod) {
+      prod.stock = Math.max(0, prod.stock - it.cantidad);
+    }
+  });
+  localStorage.setItem(STORAGE_PRODUCTOS, JSON.stringify(inventario));
+
+  // Vaciar el carrito exclusivo de este usuario tras la compra
   vaciarCarrito();
   notificarCambio();
   return nuevaOrden;

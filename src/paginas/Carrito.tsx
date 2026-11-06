@@ -11,6 +11,7 @@ import {
   vaciarCarrito,
   calcularTotalCarrito,
   agregarAlCarrito,
+  obtenerUsuarioActual,
   type ItemCarrito as ItemCarritoType,
 } from "../datos/db";
 
@@ -20,6 +21,12 @@ function Carrito() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const usuarioActual = obtenerUsuarioActual();
+    if (!usuarioActual) {
+      navigate("/registro", { replace: true });
+      return;
+    }
+
     const cargarCarrito = () => {
       setItems(obtenerCarrito());
       setTotales(calcularTotalCarrito());
@@ -27,7 +34,7 @@ function Carrito() {
 
     window.addEventListener("cuchau-storage-change", cargarCarrito);
     return () => window.removeEventListener("cuchau-storage-change", cargarCarrito);
-  }, []);
+  }, [navigate]);
 
   const handleCambiarCantidad = (id: string | number, cant: number) => {
     actualizarCantidadCarrito(id, cant);
@@ -35,6 +42,15 @@ function Carrito() {
 
   const handleEliminar = (id: string | number) => {
     eliminarDelCarrito(id);
+  };
+
+  const handleProcederPago = () => {
+    const usuario = obtenerUsuarioActual();
+    if (!usuario) {
+      navigate("/registro");
+    } else {
+      navigate("/pago");
+    }
   };
 
   const handleVaciar = () => {
@@ -48,15 +64,11 @@ function Carrito() {
       <BarraNavegacion />
 
       <main className="container mb-5">
-        <div className="alert alert-info py-2 px-3 small d-flex align-items-center gap-2 mb-4">
-          <i className="bi bi-info-circle-fill"></i>
-          <span>
-            <strong>Vista Carrito de compras:</strong> Esta vista fue diseñada para aprender y
-            demostrar la implementación reactiva del carrito de compras (Rúbrica Fig. 5).
-          </span>
-        </div>
+        <h2 className="custom-title mb-4">
+          <i className="bi bi-cart3 me-2"></i>Carrito de Compras
+        </h2>
 
-        {/* DISTRIBUCIÓN EN 2 COLUMNAS (FIGURA 5 DE LA RÚBRICA) */}
+        {/* DISTRIBUCIÓN EN 2 COLUMNAS */}
         <div className="row g-4">
           {/* COLUMNA IZQUIERDA: LISTA RÁPIDA DE PRODUCTOS DISPONIBLES */}
           <div className="col-lg-4">
@@ -158,8 +170,8 @@ function Carrito() {
                         </Link>
                         <button
                           type="button"
-                          className="btn btn-success fw-bold px-4"
-                          onClick={() => navigate("/pago")}
+                          className="btn btn-warning fw-bold px-4"
+                          onClick={handleProcederPago}
                         >
                           <i className="bi bi-credit-card me-1"></i> Comprar ahora
                         </button>

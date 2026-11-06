@@ -202,7 +202,7 @@ function GestionUsuarios() {
                 />
               </div>
               <div className="col-12 text-end">
-                <button type="submit" className="btn btn-success fw-bold px-4">
+                <button type="submit" className="btn btn-warning fw-bold px-4">
                   Guardar Usuario
                 </button>
               </div>
@@ -238,7 +238,7 @@ function GestionUsuarios() {
                       <td>{u.correo}</td>
                       <td>{u.comuna || "No registrada"}</td>
                       <td>
-                        {u.rol === "admin" && <span className="badge bg-danger">Administrador</span>}
+                        {u.rol === "admin" && <span className="badge bg-warning text-dark">Administrador</span>}
                         {u.rol === "vendedor" && <span className="badge bg-info text-dark">Vendedor</span>}
                         {u.rol === "cliente" && <span className="badge bg-secondary">Cliente</span>}
                       </td>
@@ -246,7 +246,7 @@ function GestionUsuarios() {
                         {u.rol !== "admin" ? (
                           <button
                             type="button"
-                            className="btn btn-outline-danger btn-sm"
+                            className="btn btn-outline-dark btn-sm"
                             onClick={() => handleEliminar(u.id, u.nombre, u.rol)}
                             title="Eliminar usuario"
                           >

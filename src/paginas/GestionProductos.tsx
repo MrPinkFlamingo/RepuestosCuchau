@@ -1,11 +1,10 @@
-import { useState, useEffect, type FormEvent } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BarraNavegacion from "../componentes/BarraNavegacion";
 import PiePagina from "../componentes/PiePagina";
 import Alerta from "../componentes/Alerta";
 import {
   obtenerProductosInventario,
-  guardarProducto,
   eliminarProducto,
   obtenerUsuarioActual,
 } from "../datos/db";
@@ -13,14 +12,6 @@ import type { Producto } from "../datos/Productos";
 
 function GestionProductos() {
   const [productos, setProductos] = useState<Producto[]>(() => obtenerProductosInventario());
-  const [mostrarForm, setMostrarForm] = useState(false);
-
-  // Formulario nuevo producto
-  const [nombre, setNombre] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [precio, setPrecio] = useState("");
-  const [stock, setStock] = useState("10");
-  const [categoria, setCategoria] = useState<Producto["categoria"]>("Filtros");
   const [alerta, setAlerta] = useState<{ tipo: "success" | "danger"; texto: string } | null>(null);
 
   const navigate = useNavigate();
@@ -35,36 +26,6 @@ function GestionProductos() {
       navigate("/login");
     }
   }, [navigate]);
-
-  const handleCrearProducto = (e: FormEvent) => {
-    e.preventDefault();
-    if (!nombre.trim() || !precio || !stock) {
-      setAlerta({ tipo: "danger", texto: "Completa los campos obligatorios." });
-      return;
-    }
-
-    const nuevoProd: Producto = {
-      id: "prod-" + Date.now(),
-      nombre,
-      descripcion,
-      precio: parseInt(precio, 10),
-      precioFormateado: `$${parseInt(precio, 10).toLocaleString("es-CL")}`,
-      imagen: "/img/FiltroAceiteBoschPremium.jpg",
-      categoria,
-      stock: parseInt(stock, 10),
-      enOferta: false,
-    };
-
-    guardarProducto(nuevoProd);
-    recargar();
-    setAlerta({ tipo: "success", texto: `¡Producto "${nombre}" agregado al inventario!` });
-
-    setNombre("");
-    setDescripcion("");
-    setPrecio("");
-    setStock("10");
-    setMostrarForm(false);
-  };
 
   const handleEliminar = (id: string | number, nombreProd: string) => {
     if (window.confirm(`¿Seguro que deseas eliminar "${nombreProd}" del inventario?`)) {
@@ -96,10 +57,9 @@ function GestionProductos() {
             <button
               type="button"
               className="btn btn-warning fw-semibold"
-              onClick={() => setMostrarForm(!mostrarForm)}
             >
               <i className="bi bi-plus-circle me-1"></i>
-              {mostrarForm ? "Cancelar" : "Nuevo Producto"}
+              Nuevo Producto
             </button>
             <Link to="/admin" className="btn btn-outline-dark">
               <i className="bi bi-arrow-left"></i> Volver
@@ -115,83 +75,12 @@ function GestionProductos() {
           />
         )}
 
-        {/* FORMULARIO DESPLEGABLE PARA AGREGAR PRODUCTO (RÚBRICA FIG. 10) */}
-        {mostrarForm && (
-          <div className="card shadow-sm border-0 p-4 mb-4 bg-white">
-            <h5 className="fw-bold mb-3 border-bottom pb-2">Registrar Nuevo Repuesto</h5>
-            <form onSubmit={handleCrearProducto} className="row g-3">
-              <div className="col-md-6">
-                <label className="form-label fw-semibold small">Nombre del Producto*</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Ej: Pastillas de Freno Delanteras"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="col-md-3">
-                <label className="form-label fw-semibold small">Categoría*</label>
-                <select
-                  className="form-select"
-                  value={categoria}
-                  onChange={(e) => setCategoria(e.target.value as Producto["categoria"])}
-                >
-                  <option value="Filtros">Filtros</option>
-                  <option value="Frenos">Frenos</option>
-                  <option value="Baterías">Baterías</option>
-                  <option value="Lubricantes">Lubricantes</option>
-                  <option value="Motor">Motor</option>
-                  <option value="Suspensión">Suspensión</option>
-                </select>
-              </div>
-              <div className="col-md-3">
-                <label className="form-label fw-semibold small">Precio en CLP*</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="Ej: 24990"
-                  value={precio}
-                  onChange={(e) => setPrecio(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="col-md-3">
-                <label className="form-label fw-semibold small">Stock Disponible*</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={stock}
-                  onChange={(e) => setStock(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="col-md-9">
-                <label className="form-label fw-semibold small">Descripción</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Breve descripción del repuesto y compatibilidad"
-                  value={descripcion}
-                  onChange={(e) => setDescripcion(e.target.value)}
-                />
-              </div>
-              <div className="col-12 text-end">
-                <button type="submit" className="btn btn-success fw-bold px-4">
-                  Guardar Repuesto
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
-
         {/* TABLA DE PRODUCTOS */}
         <div className="card shadow-sm border-0">
           <div className="card-header bg-dark text-white fw-semibold d-flex justify-content-between align-items-center py-3">
             <span>Listado de Repuestos ({productos.length})</span>
             <small className="text-warning">
-              <i className="bi bi-circle-fill text-danger me-1"></i> Rojo: Stock Crítico (≤ 5)
+              <i className="bi bi-circle-fill text-warning me-1"></i> Stock Crítico (≤ 5)
             </small>
           </div>
           <div className="card-body p-0">
@@ -236,7 +125,7 @@ function GestionProductos() {
                       <td>{prod.stock} un.</td>
                       <td>
                         {prod.stock <= 5 ? (
-                          <span className="badge bg-danger">Crítico</span>
+                          <span className="badge bg-warning text-dark">Crítico</span>
                         ) : (
                           <span className="badge bg-success">Disponible</span>
                         )}
@@ -251,7 +140,7 @@ function GestionProductos() {
                         </Link>
                         <button
                           type="button"
-                          className="btn btn-outline-danger btn-sm"
+                          className="btn btn-outline-dark btn-sm"
                           onClick={() => handleEliminar(prod.id, prod.nombre)}
                           title="Eliminar producto"
                         >

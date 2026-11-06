@@ -34,7 +34,7 @@ function CompraError() {
               <div className="text-center my-3">
                 <button
                   type="button"
-                  className="btn btn-success fw-bold px-4 py-2 fs-5"
+                  className="btn btn-warning fw-bold px-4 py-2 fs-5"
                   onClick={() => navigate("/pago")}
                 >
                   <i className="bi bi-arrow-repeat me-2"></i> VOLVER A REALIZAR EL PAGO

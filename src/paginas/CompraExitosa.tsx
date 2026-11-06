@@ -132,28 +132,11 @@ function CompraExitosa() {
                 </h4>
               </div>
 
-              {/* BOTONES DE ACCIÓN (FIGURA 7 DE LA RÚBRICA) */}
-              <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 pt-3 border-top">
+              {/* BOTONES DE ACCIÓN */}
+              <div className="d-flex justify-content-center pt-3 border-top">
                 <Link to="/" className="btn btn-outline-dark">
                   <i className="bi bi-house me-1"></i> Volver a la Tienda
                 </Link>
-
-                <div className="d-flex gap-2">
-                  <button
-                    type="button"
-                    className="btn btn-danger btn-sm"
-                    onClick={() => window.print()}
-                  >
-                    <i className="bi bi-file-earmark-pdf me-1"></i> Imprimir boleta en PDF
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-success btn-sm"
-                    onClick={() => alert(`Boleta enviada al correo ${ordenAMostrar.cliente.correo}`)}
-                  >
-                    <i className="bi bi-envelope me-1"></i> Enviar boleta por email
-                  </button>
-                </div>
               </div>
             </div>
           </div>

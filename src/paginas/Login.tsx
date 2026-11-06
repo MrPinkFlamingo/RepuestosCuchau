@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Alerta from "../componentes/Alerta";
 import { iniciarSesion } from "../datos/db";
 
@@ -8,6 +8,9 @@ function Login() {
   const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const aviso = location.state?.mensaje;
+  const redirigirA = location.state?.redirigirA;
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -26,7 +29,9 @@ function Login() {
     }
 
     // Redirección inteligente según el rol del usuario
-    if (res.usuario.rol === "admin") {
+    if (redirigirA) {
+      navigate(redirigirA);
+    } else if (res.usuario.rol === "admin") {
       navigate("/admin");
     } else if (res.usuario.rol === "vendedor") {
       navigate("/vendedor");
@@ -50,6 +55,9 @@ function Login() {
                 <h3 className="custom-title mt-2">Iniciar Sesión</h3>
               </div>
 
+              {aviso && !error && (
+                <Alerta tipo="info" mensaje={aviso} />
+              )}
               {error && (
                 <Alerta tipo="danger" mensaje={error} onCerrar={() => setError(null)} />
               )}

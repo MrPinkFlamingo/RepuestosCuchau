@@ -45,7 +45,7 @@ function Categorias() {
                 }`}
                 onClick={() => setCategoriaActiva(cat.nombre)}
               >
-                <i className={`bi ${cat.icono} fs-2 mb-2 d-block`}></i>
+
                 <h6 className="fw-bold mb-1">{cat.nombre}</h6>
                 <small className="text-muted" style={{ fontSize: "0.75rem" }}>
                   {cat.desc}

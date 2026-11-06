@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { Producto } from "../datos/Productos";
-import { agregarAlCarrito } from "../datos/db";
+import { agregarAlCarrito, obtenerUsuarioActual } from "../datos/db";
 
 interface Props {
   producto: Producto;
@@ -10,9 +10,23 @@ interface Props {
 
 function TarjetaProducto({ producto, onAgregar }: Props) {
   const [agregado, setAgregado] = useState(false);
+  const [topeStock, setTopeStock] = useState(false);
+  const navigate = useNavigate();
 
   const handleAgregar = () => {
-    agregarAlCarrito(producto, 1);
+    const usuario = obtenerUsuarioActual();
+    if (!usuario) {
+      navigate("/registro");
+      return;
+    }
+
+    const res = agregarAlCarrito(producto, 1);
+    if (!res.ok) {
+      setTopeStock(true);
+      setTimeout(() => setTopeStock(false), 1600);
+      return;
+    }
+
     if (onAgregar) {
       onAgregar(producto);
     }
@@ -92,10 +106,19 @@ function TarjetaProducto({ producto, onAgregar }: Props) {
                 type="button"
                 onClick={handleAgregar}
                 className={`btn btn-sm flex-fill fw-semibold d-flex align-items-center justify-content-center gap-1 ${
-                  agregado ? "btn-success" : "btn-warning"
+                  topeStock
+                    ? "btn-dark text-warning"
+                    : agregado
+                    ? "btn-success"
+                    : "btn-warning"
                 }`}
+                title={topeStock ? "Límite de stock alcanzado" : "Añadir al carrito"}
               >
-                {agregado ? (
+                {topeStock ? (
+                  <>
+                    <i className="bi bi-exclamation-circle"></i> Máx. Stock
+                  </>
+                ) : agregado ? (
                   <>
                     <i className="bi bi-check-lg"></i> ¡Listo!
                   </>

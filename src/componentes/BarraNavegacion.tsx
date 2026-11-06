@@ -67,7 +67,7 @@ function BarraNavegacion() {
                       <i className="bi bi-person-circle me-1"></i>
                       Hola, <strong>{usuario.nombre}</strong>
                       {usuario.rol === "admin" && (
-                        <span className="badge bg-danger ms-2">Admin</span>
+                        <span className="badge bg-warning text-dark ms-2">Admin</span>
                       )}
                       {usuario.rol === "vendedor" && (
                         <span className="badge bg-info text-dark ms-2">Vendedor</span>
@@ -79,7 +79,7 @@ function BarraNavegacion() {
                   {usuario.rol === "admin" && (
                     <li className="nav-item">
                       <Link className="btn btn-outline-warning btn-sm" to="/admin">
-                        <i className="bi bi-speedometer2 me-1"></i> Panel Admin
+                        Panel Admin
                       </Link>
                     </li>
                   )}
@@ -88,7 +88,7 @@ function BarraNavegacion() {
                   {usuario.rol === "vendedor" && (
                     <li className="nav-item">
                       <Link className="btn btn-outline-info btn-sm" to="/vendedor">
-                        <i className="bi bi-briefcase me-1"></i> Panel Vendedor
+                        Panel Vendedor
                       </Link>
                     </li>
                   )}
@@ -119,7 +119,8 @@ function BarraNavegacion() {
               )}
 
               {/* CARRITO REACTIVO CON CONTADOR DINÁMICO */}
-              <li className="nav-item ms-lg-2">
+              {usuario && (
+                <li className="nav-item ms-lg-2">
                 <Link
                   className="btn btn-warning btn-sm position-relative fw-semibold d-flex align-items-center gap-2"
                   to="/carrito"
@@ -138,6 +139,7 @@ function BarraNavegacion() {
                   )}
                 </Link>
               </li>
+              )}
             </ul>
           </div>
         </div>
@@ -161,13 +163,13 @@ function BarraNavegacion() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link fw-bold text-success" to="/categorias">
+              <Link className="nav-link fw-bold" to="/categorias">
                 Categorías
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link fw-bold text-danger" to="/ofertas">
-                <i className="bi bi-tag-fill me-1"></i> Ofertas
+              <Link className="nav-link fw-bold" to="/ofertas">
+                Ofertas
               </Link>
             </li>
             <li className="nav-item">

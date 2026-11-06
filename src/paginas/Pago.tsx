@@ -9,30 +9,32 @@ import {
   obtenerUsuarioActual,
   crearOrden,
   type ItemCarrito,
+  type Usuario,
 } from "../datos/db";
 
 function Pago() {
   const [items] = useState<ItemCarrito[]>(() => obtenerCarrito());
   const [totales] = useState(() => calcularTotalCarrito());
+  const [usuario, setUsuario] = useState<Usuario | null>(() => obtenerUsuarioActual());
 
-  // REQUISITO DE LA RÚBRICA (PÁG 6):
-  // "Nota: Si el usuario ha iniciado sesión toda esta información se añadirá de forma automática."
-  const [nombre, setNombre] = useState(() => obtenerUsuarioActual()?.nombre || "");
-  const [apellidos, setApellidos] = useState(() => obtenerUsuarioActual()?.apellidos || "Cliente");
-  const [correo, setCorreo] = useState(() => obtenerUsuarioActual()?.correo || "");
-
-  // Dirección de entrega
-  const [calle, setCalle] = useState(() => obtenerUsuarioActual()?.direccion || "");
-  const [depto, setDepto] = useState("");
-  const [region, setRegion] = useState(() => obtenerUsuarioActual()?.region || "Región Metropolitana de Santiago");
-  const [comuna, setComuna] = useState(() => obtenerUsuarioActual()?.comuna || "Cerrillos");
   const [indicaciones, setIndicaciones] = useState("");
-
-  const [simularFallo, setSimularFallo] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const usuarioActual = obtenerUsuarioActual();
+    if (!usuarioActual) {
+      navigate("/login", {
+        state: {
+          redirigirA: "/pago",
+          mensaje: "Debes iniciar sesión para realizar la compra.",
+        },
+        replace: true,
+      });
+      return;
+    }
+    setUsuario(usuarioActual);
+
     const carrito = obtenerCarrito();
     if (carrito.length === 0) {
       navigate("/carrito");
@@ -43,32 +45,35 @@ function Pago() {
     e.preventDefault();
     setError(null);
 
-    if (!nombre.trim() || !apellidos.trim() || !correo.trim() || !calle.trim()) {
-      setError("Por favor, completa los campos obligatorios de contacto y despacho.");
-      return;
-    }
-
-    if (simularFallo) {
-      // Navegar a la pantalla de fallo de pago (Figura 8 de la rúbrica)
-      navigate("/compra-error", {
+    if (!usuario) {
+      navigate("/login", {
         state: {
-          cliente: { nombre, apellidos, correo, calle, depto, region, comuna, indicaciones },
-          items,
-          total: totales.total,
+          redirigirA: "/pago",
+          mensaje: "Debes iniciar sesión para realizar la compra.",
         },
       });
       return;
     }
 
-    // Compra exitosa: guardar en base de datos de órdenes (Figura 7 de la rúbrica)
-    const orden = crearOrden(
-      { nombre, apellidos, correo, calle, depto, region, comuna, indicaciones },
-      items,
-      totales.total
-    );
+    const cliente = {
+      nombre: usuario.nombre,
+      apellidos: usuario.apellidos || "",
+      correo: usuario.correo,
+      calle: usuario.direccion || "Despacho a domicilio registrado",
+      depto: "",
+      region: usuario.region || "Región Metropolitana de Santiago",
+      comuna: usuario.comuna || "Santiago",
+      indicaciones: indicaciones.trim(),
+    };
 
+    // Compra exitosa: guardar en base de datos de órdenes
+    const orden = crearOrden(cliente, items, totales.total);
     navigate("/compra-exitosa", { state: { orden } });
   };
+
+  if (!usuario) {
+    return null;
+  }
 
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -78,11 +83,11 @@ function Pago() {
         <div className="row justify-content-center">
           <div className="col-lg-9">
             <div className="card shadow-sm border-0 p-4 p-md-5">
-              {/* ENCABEZADO Y RESUMEN DEL PEDIDO (FIGURA 6 DE LA RÚBRICA) */}
+              {/* ENCABEZADO Y RESUMEN DEL PEDIDO */}
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                  <h3 className="custom-title mb-0">Carrito de compra</h3>
-                  <small className="text-muted">Completa la siguiente información para el despacho</small>
+                  <h3 className="custom-title mb-0">Confirmación de Compra</h3>
+                  <small className="text-muted">Revisa tus datos y el detalle de tu pedido</small>
                 </div>
                 <span className="badge bg-primary fs-5 px-3 py-2">
                   Total a pagar: ${totales.total.toLocaleString("es-CL")}
@@ -126,115 +131,48 @@ function Pago() {
               {error && <Alerta tipo="danger" mensaje={error} onCerrar={() => setError(null)} />}
 
               <form onSubmit={handlePagar}>
-                {/* 1. INFORMACIÓN DEL CLIENTE */}
-                <h5 className="fw-bold mb-3 border-bottom pb-2">Información del cliente</h5>
-                <div className="row g-3 mb-4">
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold small">Nombre*</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={nombre}
-                      onChange={(e) => setNombre(e.target.value)}
-                      required
-                    />
+                {/* DATOS DEL COMPRADOR Y DESPACHO */}
+                <div className="card border-0 bg-light p-3 p-md-4 mb-4 shadow-sm">
+                  <div className="d-flex justify-content-between align-items-center mb-3">
+                    <h5 className="fw-bold mb-0 text-dark">
+                      <i className="bi bi-person-check-fill text-success me-2"></i>
+                      Datos del Comprador y Despacho
+                    </h5>
+                    <span className="badge bg-success-subtle text-success border border-success-subtle px-2 py-1">
+                      <i className="bi bi-shield-check me-1"></i> Sesión Iniciada
+                    </span>
                   </div>
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold small">Apellidos*</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={apellidos}
-                      onChange={(e) => setApellidos(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label fw-semibold small">Correo*</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      value={correo}
-                      onChange={(e) => setCorreo(e.target.value)}
-                      required
-                    />
+
+                  <div className="row g-3">
+                    <div className="col-sm-6">
+                      <small className="text-muted d-block">Comprador</small>
+                      <strong className="fs-6">{usuario.nombre} {usuario.apellidos || ""}</strong>
+                    </div>
+                    <div className="col-sm-6">
+                      <small className="text-muted d-block">Correo de contacto</small>
+                      <strong className="fs-6">{usuario.correo}</strong>
+                    </div>
+                    <div className="col-12 border-top pt-2 mt-2">
+                      <small className="text-muted d-block">Dirección registrada para la entrega</small>
+                      <strong className="fs-6">
+                        {usuario.direccion || "Dirección principal registrada"}, {usuario.comuna || "Santiago"} ({usuario.region || "Región Metropolitana"})
+                      </strong>
+                    </div>
                   </div>
                 </div>
 
-                {/* 2. DIRECCIÓN DE ENTREGA */}
-                <h5 className="fw-bold mb-3 border-bottom pb-2">
-                  Dirección de entrega de los productos
-                </h5>
-                <div className="row g-3 mb-4">
-                  <div className="col-md-8">
-                    <label className="form-label fw-semibold small">Calle y Número*</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Ej: Los Crisantemos 450, Edificio Norte"
-                      value={calle}
-                      onChange={(e) => setCalle(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="col-md-4">
-                    <label className="form-label fw-semibold small">
-                      Departamento (opcional)
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Ej: 603"
-                      value={depto}
-                      onChange={(e) => setDepto(e.target.value)}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold small">Región*</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={region}
-                      onChange={(e) => setRegion(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold small">Comuna*</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={comuna}
-                      onChange={(e) => setComuna(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label fw-semibold small">
-                      Indicaciones para la entrega (opcional)
-                    </label>
-                    <textarea
-                      className="form-control"
-                      rows={2}
-                      placeholder="Ej: Entre calles, color del portón, timbre sin sonido..."
-                      value={indicaciones}
-                      onChange={(e) => setIndicaciones(e.target.value)}
-                    ></textarea>
-                  </div>
-                </div>
-
-                {/* OPCIÓN DE SIMULACIÓN PARA EVALUACIÓN */}
-                <div className="form-check form-switch mb-4 p-3 bg-light rounded border">
-                  <input
-                    className="form-check-input ms-0 me-2"
-                    type="checkbox"
-                    id="simularFalloCheck"
-                    checked={simularFallo}
-                    onChange={(e) => setSimularFallo(e.target.checked)}
-                  />
-                  <label className="form-check-label fw-semibold text-danger small" htmlFor="simularFalloCheck">
-                    <i className="bi bi-bug me-1"></i> Simular fallo de pago (para probar la vista de Error de la rúbrica Fig. 8)
+                {/* INDICACIONES OPCIONALES */}
+                <div className="mb-4">
+                  <label className="form-label fw-semibold small">
+                    Indicaciones para la entrega (opcional)
                   </label>
+                  <textarea
+                    className="form-control"
+                    rows={2}
+                    placeholder="Ej: Dejar en conserjería, timbre 2, portón negro..."
+                    value={indicaciones}
+                    onChange={(e) => setIndicaciones(e.target.value)}
+                  ></textarea>
                 </div>
 
                 {/* BOTÓN DE PAGO */}
@@ -243,7 +181,7 @@ function Pago() {
                     <i className="bi bi-arrow-left me-1"></i> Volver al Carrito
                   </Link>
 
-                  <button type="submit" className="btn btn-success fw-bold px-4 py-2 fs-5">
+                  <button type="submit" className="btn btn-warning fw-bold px-4 py-2 fs-5">
                     Pagar ahora ${totales.total.toLocaleString("es-CL")}
                   </button>
                 </div>
