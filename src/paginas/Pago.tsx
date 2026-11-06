@@ -15,7 +15,7 @@ import {
 function Pago() {
   const [items] = useState<ItemCarrito[]>(() => obtenerCarrito());
   const [totales] = useState(() => calcularTotalCarrito());
-  const [usuario, setUsuario] = useState<Usuario | null>(() => obtenerUsuarioActual());
+  const [usuario] = useState<Usuario | null>(() => obtenerUsuarioActual());
 
   const [indicaciones, setIndicaciones] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -33,7 +33,7 @@ function Pago() {
       });
       return;
     }
-    setUsuario(usuarioActual);
+    // El usuario ya se inicializa en el useState superior
 
     const carrito = obtenerCarrito();
     if (carrito.length === 0) {
