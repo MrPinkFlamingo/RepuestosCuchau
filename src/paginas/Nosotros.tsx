@@ -1,10 +1,10 @@
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
+﻿import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
 
 function Nosotros() {
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         {/* CABECERA NOSOTROS */}
@@ -98,7 +98,7 @@ function Nosotros() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

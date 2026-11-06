@@ -1,4 +1,4 @@
-# 🚗 Repuestos Cuchau — E-Commerce Automotriz
+﻿# 🚗 Repuestos Cuchau — E-Commerce Automotriz
 
 > **Evaluación 2 (30%)** — Desarrollo de Aplicaciones Web Frontend  
 > **Institución:** Duoc UC  
@@ -15,7 +15,7 @@
 ## ✨ Características Principales
 
 ### 🛒 Tienda Pública y Catálogo
-- **Barra de Navegación Única y Adaptativa (`BarraNavegacion`):** Se adapta dinámicamente según el rol de la sesión iniciada (Invitado, Cliente, Administrador o Vendedor) y muestra el contador de productos del carrito en tiempo real.
+- **Barra de Navegación Única y Adaptativa (`Navbar`):** Se adapta dinámicamente según el rol de la sesión iniciada (Invitado, Cliente, Administrador o Vendedor) y muestra el contador de productos del carrito en tiempo real.
 - **Catálogo Dinámico (`Productos`):** Buscador reactivo en tiempo real por nombre/descripción y filtros por categorías automotrices (Filtros, Frenos, Baterías, Lubricantes, Motor, Suspensión).
 - **Detalle de Producto (`DetalleProducto`):** Ruta dinámica `/producto/:id` con ficha técnica detallada (marca, especificaciones, compatibilidad), selector de cantidad y botón de adición reactiva al carrito.
 - **Páginas Informativas:** Inicio con banners destacados, Categorías, Ofertas exclusivas, Quiénes Somos, Blog con tips mecánicos y Formulario de Contacto.
@@ -65,11 +65,11 @@ RepuestosCuchau/
 │   ├── componentes/          # Componentes reutilizables
 │   │   ├── Alerta.tsx            # Alerta reutilizable tipo Bootstrap
 │   │   ├── Banner.tsx            # Banner promocional
-│   │   ├── BarraNavegacion.tsx   # Barra de navegación unificada y adaptativa
-│   │   ├── ElementoCarrito.tsx   # Fila de tabla para el carrito de compras
-│   │   ├── PiePagina.tsx         # Pie de página (Footer)
-│   │   ├── TarjetaMetrica.tsx    # Card de métricas del panel administrativo
-│   │   └── TarjetaProducto.tsx   # Card reutilizable de producto
+│   │   ├── Navbar.tsx   # Barra de navegación unificada y adaptativa
+│   │   ├── CartItem.tsx   # Fila de tabla para el carrito de compras
+│   │   ├── Footer.tsx         # Pie de página (Footer)
+│   │   ├── MetricCard.tsx    # Card de métricas del panel administrativo
+│   │   └── ProductCard.tsx   # Card reutilizable de producto
 │   ├── datos/                # Modelos y base de datos simulada
 │   │   ├── db.ts                 # Store reactivo en localStorage con eventos
 │   │   └── Productos.ts          # Catálogo tipado de productos automotrices

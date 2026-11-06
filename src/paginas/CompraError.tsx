@@ -1,6 +1,6 @@
-import { useLocation, Link, useNavigate } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
+﻿import { useLocation, Link, useNavigate } from "react-router-dom";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
 
 function CompraError() {
   const location = useLocation();
@@ -9,7 +9,7 @@ function CompraError() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         <div className="row justify-content-center">
@@ -75,7 +75,7 @@ function CompraError() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

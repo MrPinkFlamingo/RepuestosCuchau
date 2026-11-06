@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
+﻿import { Link } from "react-router-dom";
+import Navbar from "../componentes/Navbar";
 import Banner from "../componentes/Banner";
-import PiePagina from "../componentes/PiePagina";
-import TarjetaProducto from "../componentes/TarjetaProducto";
+import Footer from "../componentes/Footer";
+import ProductCard from "../componentes/ProductCard";
 import { PRODUCTOS } from "../datos/Productos";
 
 function Inicio() {
@@ -10,7 +10,7 @@ function Inicio() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         {/* BANNER PROMOCIONAL */}
@@ -79,13 +79,13 @@ function Inicio() {
 
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
             {destacados.map((producto) => (
-              <TarjetaProducto key={producto.id} producto={producto} />
+              <ProductCard key={producto.id} producto={producto} />
             ))}
           </div>
         </section>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

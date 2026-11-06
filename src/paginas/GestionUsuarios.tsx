@@ -1,7 +1,7 @@
-import { useState, useEffect, type FormEvent } from "react";
+﻿import { useState, useEffect, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
 import Alerta from "../componentes/Alerta";
 import {
   obtenerUsuarios,
@@ -92,7 +92,7 @@ function GestionUsuarios() {
 
   return (
     <div className="d-flex flex-column min-vh-100 bg-light">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center my-4 gap-2">
@@ -265,7 +265,7 @@ function GestionUsuarios() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

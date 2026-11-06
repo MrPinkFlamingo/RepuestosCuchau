@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
-import ElementoCarrito from "../componentes/ElementoCarrito";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
+import CartItem from "../componentes/CartItem";
 import { PRODUCTOS } from "../datos/Productos";
 import {
   obtenerCarrito,
@@ -61,7 +61,7 @@ function Carrito() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         <h2 className="custom-title mb-4">
@@ -144,7 +144,7 @@ function Carrito() {
                         </thead>
                         <tbody>
                           {items.map((item) => (
-                            <ElementoCarrito
+                            <CartItem
                               key={item.producto.id}
                               item={item}
                               onCambiarCantidad={handleCambiarCantidad}
@@ -196,7 +196,7 @@ function Carrito() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
 import { obtenerOrdenes, obtenerUsuarioActual, type OrdenCompra } from "../datos/db";
 
 function GestionOrdenes() {
@@ -18,7 +18,7 @@ function GestionOrdenes() {
 
   return (
     <div className="d-flex flex-column min-vh-100 bg-light">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center my-4 gap-2">
@@ -166,7 +166,7 @@ function GestionOrdenes() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

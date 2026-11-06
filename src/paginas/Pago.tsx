@@ -1,7 +1,7 @@
-import { useState, useEffect, type FormEvent } from "react";
+﻿import { useState, useEffect, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
 import Alerta from "../componentes/Alerta";
 import {
   obtenerCarrito,
@@ -77,7 +77,7 @@ function Pago() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         <div className="row justify-content-center">
@@ -191,7 +191,7 @@ function Pago() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

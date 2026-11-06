@@ -1,7 +1,7 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
 import Alerta from "../componentes/Alerta";
 import { PRODUCTOS } from "../datos/Productos";
 import { agregarAlCarrito, obtenerProductosInventario, obtenerUsuarioActual } from "../datos/db";
@@ -35,7 +35,7 @@ function DetalleProducto() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         {/* MIGAS DE PAN (BREADCRUMB) */}
@@ -169,7 +169,7 @@ function DetalleProducto() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

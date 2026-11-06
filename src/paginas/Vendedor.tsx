@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
-import TarjetaMetrica from "../componentes/TarjetaMetrica";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
+import MetricCard from "../componentes/MetricCard";
 import {
   obtenerUsuarioActual,
   obtenerOrdenes,
@@ -30,7 +30,7 @@ function Vendedor() {
 
   return (
     <div className="d-flex flex-column min-vh-100 bg-light">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         {/* ENCABEZADO PANEL VENDEDOR */}
@@ -62,7 +62,7 @@ function Vendedor() {
         {/* MÉTRICAS VENDEDOR CON LA PALETA DE CSS */}
         <div className="row g-4 mb-5">
           <div className="col-md-6">
-            <TarjetaMetrica
+            <MetricCard
               titulo="Ventas Registradas"
               valor={`$${totalCompras.toLocaleString("es-CL")}`}
               subtitulo="Total de compras despachadas"
@@ -71,7 +71,7 @@ function Vendedor() {
             />
           </div>
           <div className="col-md-6">
-            <TarjetaMetrica
+            <MetricCard
               titulo="Repuestos en Inventario"
               valor={totalProductos}
               subtitulo="Stock disponible en tienda"
@@ -123,7 +123,7 @@ function Vendedor() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

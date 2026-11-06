@@ -1,6 +1,6 @@
-import { useState, type FormEvent } from "react";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
+﻿import { useState, type FormEvent } from "react";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
 import Alerta from "../componentes/Alerta";
 import { validarCorreo } from "../utilidades/validaciones";
 
@@ -41,7 +41,7 @@ function Contactos() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         <div className="mb-5 mt-4 text-center">
@@ -181,7 +181,7 @@ function Contactos() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

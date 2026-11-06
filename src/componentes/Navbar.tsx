@@ -18,7 +18,7 @@ import {
   type Usuario,
 } from "../datos/db";
 
-function BarraNavegacion() {
+function Navbar() {
   const [usuario, setUsuario] = useState<Usuario | null>(() => obtenerUsuarioActual());
   const [totales, setTotales] = useState(() => calcularTotalCarrito());
   const navigate = useNavigate();
@@ -184,4 +184,4 @@ function BarraNavegacion() {
   );
 }
 
-export default BarraNavegacion;
+export default Navbar;

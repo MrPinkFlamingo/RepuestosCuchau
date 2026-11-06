@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
-import TarjetaMetrica from "../componentes/TarjetaMetrica";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
+import MetricCard from "../componentes/MetricCard";
 import {
   obtenerUsuarioActual,
   obtenerUsuarios,
@@ -32,7 +32,7 @@ function PanelAdmin() {
 
   return (
     <div className="d-flex flex-column min-vh-100 bg-light">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         {/* ENCABEZADO DASHBOARD (FIGURA 9 DE LA RÚBRICA) */}
@@ -53,7 +53,7 @@ function PanelAdmin() {
         {/* 3 TARJETAS DE MÉTRICAS (FIGURA 9) */}
         <div className="row g-4 mb-5">
           <div className="col-md-4">
-            <TarjetaMetrica
+            <MetricCard
               titulo="Ventas Totales"
               valor={`$${totalCompras.toLocaleString("es-CL")}`}
               subtitulo="Facturación en tienda online"
@@ -62,7 +62,7 @@ function PanelAdmin() {
             />
           </div>
           <div className="col-md-4">
-            <TarjetaMetrica
+            <MetricCard
               titulo="Productos en Catálogo"
               valor={totalProductos}
               subtitulo="Inventario total disponible"
@@ -72,7 +72,7 @@ function PanelAdmin() {
             />
           </div>
           <div className="col-md-4">
-            <TarjetaMetrica
+            <MetricCard
               titulo="Usuarios Registrados"
               valor={totalUsuarios}
               subtitulo="Clientes, vendedores y admin"
@@ -151,7 +151,7 @@ function PanelAdmin() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

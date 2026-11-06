@@ -1,4 +1,4 @@
-interface TarjetaMetricaProps {
+interface MetricCardProps {
   titulo: string;
   valor: string | number;
   subtitulo?: string;
@@ -7,14 +7,14 @@ interface TarjetaMetricaProps {
   colorTexto?: string;
 }
 
-function TarjetaMetrica({
+function MetricCard({
   titulo,
   valor,
   subtitulo,
   icono,
   colorFondo = "bg-primary",
   colorTexto = "text-white",
-}: TarjetaMetricaProps) {
+}: MetricCardProps) {
   return (
     <div className={`card ${colorFondo} ${colorTexto} shadow-sm border-0 h-100`}>
       <div className="card-body d-flex align-items-center justify-content-between p-4">
@@ -31,4 +31,4 @@ function TarjetaMetrica({
   );
 }
 
-export default TarjetaMetrica;
+export default MetricCard;

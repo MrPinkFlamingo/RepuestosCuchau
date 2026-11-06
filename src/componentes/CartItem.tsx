@@ -6,7 +6,7 @@ interface Props {
   onEliminar: (id: string | number) => void;
 }
 
-function ElementoCarrito({ item, onCambiarCantidad, onEliminar }: Props) {
+function CartItem({ item, onCambiarCantidad, onEliminar }: Props) {
   const { producto, cantidad } = item;
   const subtotal = producto.precio * cantidad;
 
@@ -80,4 +80,4 @@ function ElementoCarrito({ item, onCambiarCantidad, onEliminar }: Props) {
   );
 }
 
-export default ElementoCarrito;
+export default CartItem;

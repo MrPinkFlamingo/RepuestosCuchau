@@ -8,7 +8,7 @@ interface Props {
   onAgregar?: (prod: Producto) => void;
 }
 
-function TarjetaProducto({ producto, onAgregar }: Props) {
+function ProductCard({ producto, onAgregar }: Props) {
   const [agregado, setAgregado] = useState(false);
   const [topeStock, setTopeStock] = useState(false);
   const navigate = useNavigate();
@@ -136,4 +136,4 @@ function TarjetaProducto({ producto, onAgregar }: Props) {
   );
 }
 
-export default TarjetaProducto;
+export default ProductCard;

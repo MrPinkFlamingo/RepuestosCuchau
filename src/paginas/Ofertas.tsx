@@ -1,7 +1,7 @@
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
+﻿import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
 import Banner from "../componentes/Banner";
-import TarjetaProducto from "../componentes/TarjetaProducto";
+import ProductCard from "../componentes/ProductCard";
 import { PRODUCTOS } from "../datos/Productos";
 
 function Ofertas() {
@@ -9,7 +9,7 @@ function Ofertas() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         <Banner
@@ -34,12 +34,12 @@ function Ofertas() {
 
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
           {productosEnOferta.map((producto) => (
-            <TarjetaProducto key={producto.id} producto={producto} />
+            <ProductCard key={producto.id} producto={producto} />
           ))}
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
-import { useLocation, Link } from "react-router-dom";
-import BarraNavegacion from "../componentes/BarraNavegacion";
-import PiePagina from "../componentes/PiePagina";
+﻿import { useLocation, Link } from "react-router-dom";
+import Navbar from "../componentes/Navbar";
+import Footer from "../componentes/Footer";
 import type { OrdenCompra } from "../datos/db";
 
 function CompraExitosa() {
@@ -28,7 +28,7 @@ function CompraExitosa() {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BarraNavegacion />
+      <Navbar />
 
       <main className="container mb-5">
         <div className="row justify-content-center">
@@ -143,7 +143,7 @@ function CompraExitosa() {
         </div>
       </main>
 
-      <PiePagina />
+      <Footer />
     </div>
   );
 }
