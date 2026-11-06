@@ -1,5 +1,16 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+
+// Arreglo de rutas del menú para renderizado dinámico mediante .map()
+const ENLACES_MENU = [
+  { ruta: "/", texto: "Inicio" },
+  { ruta: "/productos", texto: "Productos" },
+  { ruta: "/categorias", texto: "Categorías" },
+  { ruta: "/ofertas", texto: "Ofertas" },
+  { ruta: "/nosotros", texto: "Nosotros" },
+  { ruta: "/blog", texto: "Blog" },
+  { ruta: "/contactos", texto: "Contactos" },
+];
 import {
   obtenerUsuarioActual,
   cerrarSesion,
@@ -11,6 +22,7 @@ function BarraNavegacion() {
   const [usuario, setUsuario] = useState<Usuario | null>(() => obtenerUsuarioActual());
   const [totales, setTotales] = useState(() => calcularTotalCarrito());
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // Sincronizar estado de usuario y carrito cuando ocurran cambios
@@ -152,41 +164,19 @@ function BarraNavegacion() {
             className="navbar-nav flex-row w-100 justify-content-center flex-wrap"
             style={{ gap: "15px" }}
           >
-            <li className="nav-item">
-              <Link className="nav-link fw-bold text-primary" to="/">
-                Inicio
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/productos">
-                Productos
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/categorias">
-                Categorías
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/ofertas">
-                Ofertas
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/nosotros">
-                Nosotros
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/blog">
-                Blog
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link fw-bold" to="/contactos">
-                Contactos
-              </Link>
-            </li>
+            {ENLACES_MENU.map((enlace) => {
+              const estaActivo = location.pathname === enlace.ruta;
+              return (
+                <li key={enlace.ruta} className="nav-item">
+                  <Link
+                    className={`nav-link fw-bold ${estaActivo ? "text-primary activo" : ""}`}
+                    to={enlace.ruta}
+                  >
+                    {enlace.texto}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </nav>
