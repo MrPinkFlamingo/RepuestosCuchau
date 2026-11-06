@@ -23,7 +23,7 @@ export const PRODUCTOS: Producto[] = [
     categoria: "Filtros",
     enOferta: true,
     descuento: 15,
-    stock: 25,
+    stock: 100,
     especificaciones: {
       "Marca": "Bosch",
       "Tipo": "Filtro blindado de aceite",
@@ -41,7 +41,7 @@ export const PRODUCTOS: Producto[] = [
     categoria: "Frenos",
     enOferta: true,
     descuento: 20,
-    stock: 14,
+    stock: 100,
     especificaciones: {
       "Marca": "Brembo",
       "Posición": "Delanteras",
@@ -58,7 +58,7 @@ export const PRODUCTOS: Producto[] = [
     imagen: "/img/BateriaHankook55MP.jpg",
     categoria: "Baterías",
     enOferta: false,
-    stock: 8,
+    stock: 100,
     especificaciones: {
       "Marca": "Hankook",
       "Amperaje": "55 Ah",
@@ -76,7 +76,7 @@ export const PRODUCTOS: Producto[] = [
     categoria: "Lubricantes",
     enOferta: true,
     descuento: 10,
-    stock: 30,
+    stock: 100,
     especificaciones: {
       "Marca": "Mobil 1",
       "Viscosidad": "5W-30",
@@ -93,7 +93,7 @@ export const PRODUCTOS: Producto[] = [
     imagen: "/img/DiscoFreno.png",
     categoria: "Frenos",
     enOferta: false,
-    stock: 12,
+    stock: 100,
     especificaciones: {
       "Marca": "Brembo",
       "Diámetro": "280 mm",
@@ -110,7 +110,7 @@ export const PRODUCTOS: Producto[] = [
     imagen: "/img/AmortiguadorMonroe.jpg",
     categoria: "Suspensión",
     enOferta: false,
-    stock: 6,
+    stock: 100,
     especificaciones: {
       "Marca": "Monroe",
       "Tipo": "Gas presurizado",
@@ -128,7 +128,7 @@ export const PRODUCTOS: Producto[] = [
     categoria: "Motor",
     enOferta: true,
     descuento: 25,
-    stock: 18,
+    stock: 100,
     especificaciones: {
       "Marca": "Gates",
       "Material": "HNBR de alta resistencia",
@@ -145,7 +145,7 @@ export const PRODUCTOS: Producto[] = [
     imagen: "/img/BujiaNGK.jpg",
     categoria: "Motor",
     enOferta: false,
-    stock: 40,
+    stock: 100,
     especificaciones: {
       "Marca": "NGK",
       "Material": "Iridio IX",
@@ -162,7 +162,7 @@ export const PRODUCTOS: Producto[] = [
     imagen: "/img/FitroAireKN.jpg",
     categoria: "Filtros",
     enOferta: false,
-    stock: 15,
+    stock: 100,
     especificaciones: {
       "Marca": "K&N",
       "Material": "Algodón aceitado",
@@ -179,7 +179,7 @@ export const PRODUCTOS: Producto[] = [
     imagen: "/img/LiquidoFrenosDOT4.jpg",
     categoria: "Frenos",
     enOferta: false,
-    stock: 50,
+    stock: 100,
     especificaciones: {
       "Marca": "Bosch",
       "Norma": "DOT 4",
@@ -196,7 +196,7 @@ export const PRODUCTOS: Producto[] = [
     imagen: "/img/TernostatoMotorad.jpg",
     categoria: "Motor",
     enOferta: false,
-    stock: 20,
+    stock: 100,
     especificaciones: {
       "Marca": "Motorad",
       "Apertura": "88°C",
@@ -214,7 +214,7 @@ export const PRODUCTOS: Producto[] = [
     categoria: "Motor",
     enOferta: true,
     descuento: 15,
-    stock: 9,
+    stock: 100,
     especificaciones: {
       "Marca": "Dolz",
       "Turbina": "Metálica",
@@ -230,7 +230,7 @@ export const PRODUCTOS: Producto[] = [
     imagen: "/img/RadiadorAluminio.jpg",
     categoria: "Motor",
     enOferta: false,
-    stock: 5,
+    stock: 100,
     especificaciones: {
       "Marca": "Nissens / Cuchau",
       "Material": "Aluminio soldado",
@@ -248,7 +248,7 @@ export const PRODUCTOS: Producto[] = [
     categoria: "Motor",
     enOferta: true,
     descuento: 10,
-    stock: 4,
+    stock: 100,
     especificaciones: {
       "Marca": "LUK",
       "Contenido": "Prensa + Disco + Rodamiento",
