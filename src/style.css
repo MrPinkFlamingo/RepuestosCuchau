@@ -1,0 +1,39 @@
+body {
+    background-color: #f8f9fa; /* Un gris muy claro, neutro */
+}
+
+.custom-title {
+    color: #0d6efd; 
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.product-card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.btn-custom-action {
+    background-color: #ff9800; 
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.btn-custom-action:hover {
+    background-color: #e68a00;
+    color: white;
+}
+
+.footer-text {
+    color: #6c757d;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+
