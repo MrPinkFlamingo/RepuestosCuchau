@@ -1,35 +1,73 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Navbar from './componentes/Navbar'
-import Footer from './componentes/Footer'
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AppProvider } from './context/AppContext';
+import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
+import { CartModal } from './components/Cart/CartModal';
 
-import Inicio from './paginas/Inicio'
-import Productos from './paginas/Productos'
-import Nosotros from './paginas/Nosotros'
-import Blog from './paginas/Blog'
-import Contactos from './paginas/Contactos'
-import Login from './paginas/Login'
-import Registro from './paginas/Registro'
+// Páginas
+import { Home } from './pages/Home';
+import { Products } from './pages/Products';
+import { ProductDetail } from './pages/ProductDetail';
+import { About } from './pages/About';
+import { Blog } from './pages/Blog';
+import { Contact } from './pages/Contact';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Admin } from './pages/Admin';
+import { ProductManagement } from './pages/ProductManagement';
+import { OrderManagement } from './pages/OrderManagement';
+import { UserManagement } from './pages/UserManagement';
 
-function App() {
+// Componente para volver arriba al cambiar de ruta
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
+export const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <div className="d-flex flex-column min-vh-100">
-        <Navbar />
+    <AppProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <div className="d-flex flex-column min-vh-100">
+          {/* Navbar persistente y reactivo */}
+          <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/contactos" element={<Contactos />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
-        </Routes>
+          {/* Modal reactivo del Carrito */}
+          <CartModal />
 
-        <Footer />
-      </div>
-    </BrowserRouter>
-  )
-}
+          {/* Contenido principal dinámico según la ruta */}
+          <main className="flex-grow-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/productos" element={<Products />} />
+              <Route path="/producto/:id" element={<ProductDetail />} />
+              <Route path="/nosotros" element={<About />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/contactos" element={<Contact />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/registro" element={<Register />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/gestion-productos" element={<ProductManagement />} />
+              <Route path="/gestion-ordenes" element={<OrderManagement />} />
+              <Route path="/gestion-usuarios" element={<UserManagement />} />
+              {/* Ruta por defecto para cualquier ruta no encontrada */}
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </main>
 
-export default App
+          {/* Footer persistente */}
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </AppProvider>
+  );
+};
+
+export default App;
